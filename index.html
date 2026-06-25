@@ -1,5 +1,728 @@
-<html>
-	<body>
-		<h1>Welcome!</h1>
-	</body>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="site-title">PleaseRetry</title>
+    
+    <link rel="stylesheet" id="theme-xp" href="https://unpkg.com/xp.css">
+    <link rel="stylesheet" id="theme-98" href="https://unpkg.com/98.css" disabled>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+    
+    <style>
+        body {
+            background-color: #008080;
+            margin: 0;
+            padding: 10px;
+            font-family: Tahoma, Geneva, sans-serif;
+            height: calc(100vh - 20px);
+            display: flex;
+            flex-direction: column;
+            transition: background-color 0.2s ease;
+        }
+
+        body.xp-theme {
+            background-color: #5A7EDC; 
+        }
+
+        .window {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 10px;
+            padding: 4px 8px;
+            align-items: center;
+            border-bottom: 2px solid #dfdfdf;
+            background: #f1f1f1;
+        }
+        
+        body.xp-theme .toolbar {
+            background: #f0f0f0;
+            border-bottom: 1px solid #b2b2b2;
+        }
+
+        .window-body {
+            flex: 1;
+            display: flex;
+            gap: 10px;
+            overflow: hidden;
+            padding: 8px;
+            background: #f1f1f1;
+        }
+
+        .sidebar {
+            width: 280px;
+            min-width: 240px;
+            overflow-y: auto;
+            background: #fff;
+            box-shadow: inset -1px -1px #fff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px #808080;
+            padding: 5px;
+        }
+
+        .content-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .content-area {
+            flex: 1;
+            overflow-y: auto;
+            background: #fff;
+            box-shadow: inset -1px -1px #fff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px #808080;
+            padding: 15px 25px;
+            position: relative;
+            scroll-behavior: smooth;
+        }
+
+        ul.tree-view {
+            box-shadow: none;
+            padding: 0;
+            margin: 0;
+            background: none;
+        }
+
+        ul.tree-view li {
+            list-style-type: none;
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        ul.tree-view span.file-link {
+            display: block;
+            padding: 2px 4px;
+        }
+        
+        ul.tree-view span.file-link.active {
+            background: #000080;
+            color: #fff;
+        }
+        body.xp-theme ul.tree-view span.file-link.active {
+            background: #316ac5;
+            color: #fff;
+        }
+
+        .doc-toc-tree {
+            margin: 2px 0 5px 15px;
+            padding: 0;
+            list-style-type: none;
+            border-left: 1px dashed #808080;
+            padding-left: 5px;
+        }
+        .doc-toc-item {
+            font-size: 11px;
+            padding: 1px 2px;
+            color: #333;
+            text-decoration: none;
+            display: block;
+        }
+        .doc-toc-item:hover {
+            text-decoration: underline;
+            color: #0000ff;
+        }
+        body.xp-theme .doc-toc-item:hover {
+            color: #316ac5;
+        }
+
+        .md-content {
+            font-size: 13px;
+            line-height: 1.5;
+            color: #000;
+        }
+
+        .md-content h1, .md-content h2, .md-content h3 {
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #000;
+        }
+        .md-content h1 { font-size: 1.7em; border-bottom: 2px solid #808080; padding-bottom: 4px; }
+        .md-content h2 { font-size: 1.4em; border-bottom: 1px solid #dfdfdf; padding-bottom: 2px; }
+        .md-content h3 { font-size: 1.15em; }
+
+        .md-content p, .md-content ul, .md-content ol {
+            margin-bottom: 12px;
+        }
+        
+        .md-content ul, .md-content ol {
+            padding-left: 20px;
+        }
+
+        .md-content pre[class*="language-"], 
+        .md-content pre {
+            padding: 10px !important;
+            background: #f8f9fa !important;
+            border: 1px solid #808080 !important;
+            overflow-x: auto !important;
+            font-size: 12px !important;
+            font-family: "Courier New", Courier, monospace !important;
+            margin: 12px 0 !important;
+            box-shadow: none !important;
+        }
+        
+        .md-content code[class*="language-"],
+        .md-content code {
+            font-family: "Courier New", Courier, monospace !important;
+            text-shadow: none !important;
+        }
+
+        .md-content code:not(pre code) {
+            background-color: #f4f4f4 !important;
+            color: #b30000 !important; 
+            padding: 1px 5px !important;
+            border: 1px solid #cccccc !important;
+            font-size: 12.5px !important;
+            font-weight: bold !important; 
+            white-space: nowrap !important;
+            display: inline-block !important;
+            text-shadow: none !important;
+        }
+
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            margin: 12px 0;
+            border: 1px solid #808080;
+        }
+
+        .md-content table {
+            border-collapse: collapse;
+            width: 100%;
+            min-width: 550px;
+            font-size: 12px;
+            margin: 0;
+        }
+        .md-content th, .md-content td {
+            border: 1px solid #808080;
+            padding: 5px 8px;
+            text-align: left;
+        }
+        .md-content th { background: #dfdfdf; font-weight: bold; }
+
+        .markdown-alert {
+            padding: 10px 14px;
+            margin-bottom: 14px;
+            border-left: 4px solid #808080;
+            background-color: #f8f9fa;
+        }
+        .markdown-alert .markdown-alert-title {
+            font-weight: bold;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+        }
+        .markdown-alert.markdown-alert-note { border-left-color: #004085; background-color: #cce5ff; color: #004085; }
+        .markdown-alert.markdown-alert-tip { border-left-color: #155724; background-color: #d4edda; color: #155724; }
+        .markdown-alert.markdown-alert-important { border-left-color: #721c24; background-color: #f8d7da; color: #721c24; }
+        .markdown-alert.markdown-alert-warning { border-left-color: #856404; background-color: #fff3cd; color: #856404; }
+        .markdown-alert.markdown-alert-caution { border-left-color: #dc3545; background-color: #f8d7da; color: #721c24; }
+
+        .md-modal-trigger {
+            cursor: pointer;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-window {
+            width: 650px;
+            max-width: 90%;
+            height: 450px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .modal-body {
+            flex: 1;
+            overflow-y: auto;
+            background: #fff;
+            padding: 15px;
+            box-shadow: inset -1px -1px #fff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px #808080;
+        }
+
+        .status-bar {
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="window">
+    <div class="title-bar">
+        <div class="title-bar-text" id="window-title">PleaseRetry</div>
+        <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Maximize"></button>
+            <button aria-label="Close" onclick="alert('Do you really want to exit the documentation? :((((\n\nThen I\'ll delete it! >:(')"></button>
+        </div>
+    </div>
+    
+    <div class="toolbar">
+        <span style="font-size:12px; font-weight:bold;">Theme:</span>
+        <select id="theme-selector" style="font-size:12px; padding: 2px 50px 0px 5px;">
+            <option value="xp">Windows XP</option>
+            <option value="98">Windows 98</option>
+        </select>
+    </div>
+    
+    <div class="window-body">
+        
+        <aside class="sidebar">
+            <ul class="tree-view" id="docs-tree">
+            </ul>
+        </aside>
+        
+        <div class="content-container">
+            <main class="content-area" id="content">
+                <div class="md-content" />
+            </main>
+        </div>
+        
+    </div>
+
+    <div class="status-bar">
+        <p class="status-bar-field" id="status-path">URI: undefined</p>
+        <p class="status-bar-field" id="status-theme">Current theme: undefined</p>
+    </div>
+</div>
+
+<div class="modal-overlay" id="custom-modal">
+    <div class="window modal-window">
+        <div class="title-bar">
+            <div class="title-bar-text" id="modal-title">View a document</div>
+            <div class="title-bar-controls">
+                <button aria-label="Close" id="close-modal-btn"></button>
+            </div>
+        </div>
+        <div class="modal-body" id="modal-content">
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="redirect-modal" style="z-index: 10000;">
+    <div class="window modal-window" style="width: 400px; height: auto; max-height: 200px;">
+        <div class="title-bar">
+            <div class="title-bar-text">Security Warning</div>
+            <div class="title-bar-controls">
+                <button aria-label="Close" id="close-redirect-btn"></button>
+            </div>
+        </div>
+        <div class="modal-body" style="padding: 20px; display: flex; flex-direction: column; gap: 15px;">
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <span style="font-size: 24px;">⚠️</span>
+                <p style="margin: 0; font-size: 12px; line-height: 1.4;">
+                    You are about to leave the website and visit an external link:<br>
+                    <b id="redirect-domain" style="color: #b30000; word-break: break-all;">domain.com</b>
+                </p>
+            </div>
+            <p style="margin: 0; font-size: 12px; font-weight: bold;">Do you want to continue?</p>
+            <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 5px;">
+                <button id="confirm-redirect-btn" style="min-width: 70px; font-weight: bold;">Yes</button>
+                <button id="cancel-redirect-btn" style="min-width: 70px;">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+
+<script>
+    const DEFAULT_ROUTE = 'intro';
+
+    const ROUTE_ALIASES = {
+        'intro': { path: 'docs/introduction.md', name: 'Введение' },
+        'interfaces':  { path: 'docs/interfaces.md', name: 'Интерфейсы' },
+        'doc-viewer': { path: 'docs/documentation-viewer.md', name: 'Документация по \"Средству просмотра документации\"' },
+        'doom': { path: 'doom/doom.html', name: 'DOOM' }
+    };
+
+    const DOCS_STRUCTURE = [
+        {
+            type: "file",
+            name: "Введение",
+            path: "docs/introduction.md"
+        },
+        {
+            type: "file",
+            name: "Интерфейсы",
+            path: "docs/interfaces.md"
+        },
+        {
+            type: "file",
+            name: "Документация по \"Средству просмотра документации\"",
+            path: "docs/documentation-viewer.md"
+        }
+    ];
+
+    const originalRendererBlockquote = marked.Renderer.prototype.blockquote;
+    
+    marked.use({
+        renderer: {
+            blockquote(quote) {
+                const match = quote.match(/<p>\s*\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*(<br\s*\/?>)?/i);
+                if (match) {
+                    const type = match[1].toLowerCase();
+                    const cleanQuote = quote.replace(match[0], `<p class="markdown-alert-title">${type.toUpperCase()}</p><p>`);
+                    return `<div class="markdown-alert markdown-alert-${type}">${cleanQuote}</div>`;
+                }
+                return originalRendererBlockquote.call(this, quote);
+            },
+            table(header, body) {
+                return `<div class="table-responsive"><table>${header}${body}</table></div>`;
+            }
+        }
+    });
+
+    const themeSelector = document.getElementById('theme-selector');
+    const themeXP = document.getElementById('theme-xp');
+    const theme98 = document.getElementById('theme-98');
+    const statusTheme = document.getElementById('status-theme');
+
+    function applyTheme(themeName) {
+        if (themeName === '98') {
+            themeXP.disabled = true;
+            theme98.disabled = false;
+            document.body.classList.remove('xp-theme');
+            statusTheme.textContent = "Current theme: Windows 98";
+            themeSelector.value = '98';
+        } else {
+            themeXP.disabled = false;
+            theme98.disabled = true;
+            document.body.classList.add('xp-theme');
+            statusTheme.textContent = "Current theme: Windows XP";
+            themeSelector.value = 'xp';
+        }
+        localStorage.setItem('selected-theme', themeName);
+    }
+
+    themeSelector.addEventListener('change', (e) => applyTheme(e.target.value));
+    applyTheme(localStorage.getItem('selected-theme') || 'xp');
+
+    function buildTreeDOM(items, parentElement) {
+        items.forEach(item => {
+            const li = document.createElement('li');
+            
+            if (item.type === 'dir') {
+                const details = document.createElement('details');
+                details.open = false;
+                const summary = document.createElement('summary');
+                summary.textContent = item.name;
+                
+                const subUl = document.createElement('ul');
+                buildTreeDOM(item.children, subUl);
+                
+                details.appendChild(summary);
+                details.appendChild(subUl);
+                li.appendChild(details);
+                
+            } else if (item.type === 'file-dir') {
+                const details = document.createElement('details');
+                details.open = false;
+                
+                const summary = document.createElement('summary');
+                summary.className = 'file-link';
+                summary.textContent = item.name;
+                summary.dataset.path = item.path;
+                
+                summary.addEventListener('click', (e) => {
+                    if (e.offsetX > 15) { 
+                        e.preventDefault();
+                    }
+                    const alias = Object.keys(ROUTE_ALIASES).find(key => ROUTE_ALIASES[key].path === item.path);
+                    window.location.hash = alias ? alias : item.path;
+                });
+                
+                const subUl = document.createElement('ul');
+                buildTreeDOM(item.children, subUl);
+                
+                details.appendChild(summary);
+                details.appendChild(subUl);
+                li.appendChild(details);
+                
+            } else if (item.type === 'file') {
+                const container = document.createElement('div');
+                container.style.position = 'relative';
+                
+                const span = document.createElement('span');
+                span.className = 'file-link';
+                span.textContent = item.name;
+                span.dataset.path = item.path;
+                
+                span.addEventListener('click', () => {
+                    const alias = Object.keys(ROUTE_ALIASES).find(key => ROUTE_ALIASES[key].path === item.path);
+                    window.location.hash = alias ? alias : item.path;
+                });
+                
+                container.appendChild(span);
+                li.appendChild(container);
+            }
+            parentElement.appendChild(li);
+        });
+    }
+
+    async function loadMarkdownFile(filePath, fileName) {
+        const contentArea = document.getElementById('content');
+        const windowTitle = document.getElementById('window-title');
+        const siteTitle = document.getElementById('site-title');
+        const statusPath = document.getElementById('status-path');
+        
+        windowTitle.textContent = `Reference - [${fileName}]`;
+        siteTitle.textContent = `Reference - [${fileName}]`;
+        statusPath.textContent = `URI: ${filePath}`;
+        
+        if (filePath.endsWith('.html')) {
+            contentArea.style.padding = "0"; 
+            
+            contentArea.innerHTML = `
+                <iframe src="${filePath}" 
+                        style="width: 100%; height: 100%; border: none; display: block;" 
+                        sandbox="allow-scripts allow-same-origin allow-forms allow-modals"
+                        allow="autoplay; keyboard; gamepad; pointer-lock;">
+                </iframe>`;
+            return;
+        }
+        
+        contentArea.style.padding = "15px 25px";
+        
+        contentArea.innerHTML = `<div class="md-content"><p><i>Loading data...</i></p></div>`;
+        
+        try {
+            const response = await fetch(filePath);
+            if (!response.ok) throw new Error(`HTTP Error ${response.status}`);
+            const markdownText = await response.text();
+            
+            let htmlResult = marked.parse(markdownText);
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = htmlResult;
+            const headings = tempDiv.querySelectorAll('h1, h2, h3');
+            
+            document.querySelectorAll('.doc-toc-wrapper').forEach(el => {
+                const parentDetails = el.closest('details');
+                if (el) el.open = false;
+                el.remove();
+            });
+            
+            const activeEl = document.querySelector(`.file-link[data-path="${filePath}"]`);
+            
+            if (headings.length > 0 && activeEl) {
+                const tocWrapper = document.createElement('details');
+                tocWrapper.className = 'doc-toc-wrapper';
+                tocWrapper.open = true;
+                
+                const tocSummary = document.createElement('summary');
+                tocSummary.textContent = 'Содержание';
+                tocSummary.style.fontSize = '11px';
+                tocSummary.style.color = '#808080';
+                tocSummary.style.marginLeft = '15px';
+                tocSummary.style.cursor = 'pointer';
+                
+                const tocUl = document.createElement('ul');
+                tocUl.className = 'doc-toc-tree';
+                
+                headings.forEach((heading, index) => {
+                    const id = `heading-${index}`;
+                    heading.id = id;
+                    
+                    const levelSpace = heading.tagName === 'H2' ? '&nbsp;&nbsp;• ' : heading.tagName === 'H3' ? '&nbsp;&nbsp;&nbsp;&nbsp;◦ ' : '• ';
+                    
+                    const tocLi = document.createElement('li');
+                    const tocLink = document.createElement('a');
+                    tocLink.className = 'doc-toc-item';
+                    tocLink.href = `javascript:void(0);`;
+                    tocLink.innerHTML = `${levelSpace}${heading.textContent}`;
+                    
+                    tocLink.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const targetEl = document.getElementById(id);
+                        if (targetEl) {
+                            targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    });
+                    
+                    tocLi.appendChild(tocLink);
+                    tocUl.appendChild(tocLi);
+                });
+                
+                tocWrapper.appendChild(tocSummary);
+                tocWrapper.appendChild(tocUl);
+                
+                activeEl.parentNode.appendChild(tocWrapper);
+            }
+            
+            contentArea.innerHTML = `<div class="md-content">${tempDiv.innerHTML}</div>`;
+            Prism.highlightAllUnder(contentArea);
+            bindModalTriggers();
+            bindExternalLinks();
+            
+        } catch (error) {
+            contentArea.innerHTML = `
+                <div class="md-content" style="color: #ff0000;">
+                    <h1>Error reading file</h1>
+                    <p>Failed to open document at path: <code>${filePath}</code></p>
+                </div>`;
+        }
+    }
+
+    function handleHashRoute() {
+        let hash = window.location.hash.replace('#', '').trim();
+        if (!hash) {
+            window.location.hash = DEFAULT_ROUTE;
+            return;
+        }
+
+        let targetPath = '';
+        let targetName = '';
+
+        if (ROUTE_ALIASES[hash]) {
+            targetPath = ROUTE_ALIASES[hash].path;
+            targetName = ROUTE_ALIASES[hash].name;
+        } else {
+            targetPath = hash;
+            targetName = hash.split('/').pop();
+        }
+
+        document.querySelectorAll('.doc-toc-wrapper').forEach(wrapper => {
+            wrapper.open = false;
+        });
+
+        document.querySelectorAll('.file-link').forEach(el => el.classList.remove('active'));
+        
+        const elToActivate = document.querySelector(`.file-link[data-path="${targetPath}"]`);
+        if (elToActivate) {
+            elToActivate.classList.add('active');
+            
+            let parentDetails = elToActivate.closest('details');
+            while (parentDetails) {
+                parentDetails.open = true;
+                parentDetails = parentDetails.parentNode.closest('details');
+            }
+        }
+
+        loadMarkdownFile(targetPath, targetName);
+    }
+
+    const modalOverlay = document.getElementById('custom-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalContent = document.getElementById('modal-content');
+    const closeModalBtn = document.getElementById('close-modal-btn');
+
+    async function openMdInModal(filePath) {
+        modalTitle.textContent = `Браузер: ${filePath.split('/').pop()}`;
+        modalContent.innerHTML = `<p><i>Reading an object...</i></p>`;
+        modalOverlay.classList.add('active');
+        try {
+            const response = await fetch(filePath);
+            if (!response.ok) throw new Error(`HTTP Error ${response.status}`);
+            const text = await response.text();
+            modalContent.innerHTML = `<div class="md-content">${marked.parse(text)}</div>`;
+            Prism.highlightAllUnder(modalContent);
+        } catch (e) {
+            modalContent.innerHTML = `<p style="color:red;">Failed to load file: ${filePath}</p>`;
+        }
+    }
+
+    function bindModalTriggers() {
+        document.querySelectorAll('.md-modal-trigger').forEach(element => {
+            element.removeEventListener('click', handleModalTriggerClick);
+            element.addEventListener('click', handleModalTriggerClick);
+        });
+    }
+
+    function handleModalTriggerClick(e) {
+        const path = e.currentTarget.getAttribute('data-md-path');
+        if (path) openMdInModal(path);
+    }
+
+    const redirectModal = document.getElementById('redirect-modal');
+    const redirectDomainSpan = document.getElementById('redirect-domain');
+    const confirmRedirectBtn = document.getElementById('confirm-redirect-btn');
+    const cancelRedirectBtn = document.getElementById('cancel-redirect-btn');
+    const closeRedirectBtn = document.getElementById('close-redirect-btn');
+
+    let targetExternalUrl = '';
+    function openExternalLinkModal(url) {
+        targetExternalUrl = url;
+        
+        try {
+            const urlObj = new URL(url);
+            redirectDomainSpan.textContent = urlObj.hostname;
+        } catch (e) {
+            redirectDomainSpan.textContent = url;
+        }
+        
+        redirectModal.classList.add('active');
+    }
+
+    confirmRedirectBtn.addEventListener('click', () => {
+        window.open(targetExternalUrl, '_blank', 'noopener,noreferrer');
+        redirectModal.classList.remove('active');
+    });
+
+    const closeRedirect = () => redirectModal.classList.remove('active');
+    
+    cancelRedirectBtn.addEventListener('click', closeRedirect);
+    closeRedirectBtn.addEventListener('click', closeRedirect);
+    redirectModal.addEventListener('click', (e) => { 
+        if (e.target === redirectModal) closeRedirect(); 
+    });
+
+    function bindExternalLinks() {
+        const contentArea = document.getElementById('content');
+        if (!contentArea) return;
+
+        const links = contentArea.querySelectorAll('a');
+        links.forEach(link => {
+            const href = link.getAttribute('href');
+            
+            if (href && (href.startsWith('http://') || href.startsWith('https://')) && !link.classList.contains('md-modal-trigger')) {
+                
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    openExternalLinkModal(href);
+                });
+            }
+        });
+    }
+
+    closeModalBtn.addEventListener('click', () => modalOverlay.classList.remove('active'));
+    modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) modalOverlay.classList.remove('active'); });
+
+    window.addEventListener('hashchange', handleHashRoute);
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const treeRoot = document.getElementById('docs-tree');
+        buildTreeDOM(DOCS_STRUCTURE, treeRoot);
+        handleHashRoute();
+    });
+</script>
+</body>
 </html>
