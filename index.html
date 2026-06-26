@@ -360,7 +360,7 @@
 
     const ROUTE_ALIASES = {
         'intro': { path: 'docs/introduction.md', name: 'Введение' },
-        'interfaces':  { path: 'docs/interfaces.md', name: 'Интерфейсы' },
+        'interfaces':  { path: 'docs/prsteamworks/introduction.md', name: 'Интерфейсы' },
         'doc-viewer': { path: 'docs/documentation-viewer.md', name: 'Документация по \"Средству просмотра документации\"' },
         'doom': { path: 'doom/doom.html', name: 'DOOM' }
     };
@@ -372,9 +372,26 @@
             path: "docs/introduction.md"
         },
         {
-            type: "file",
+            type: "file-dir",
             name: "Интерфейсы",
-            path: "docs/interfaces.md"
+            path: "docs/prsteamworks/introduction.md",
+            children: [
+                {
+                    type: "file",
+                    name: "ISteamAppList",
+                    path: "docs/prsteamworks/isteamapplist.md"
+                },
+                {
+                    type: "file",
+                    name: "ISteamApps",
+                    path: "docs/prsteamworks/isteamapps.md"
+                },
+                {
+                    type: "file",
+                    name: "ISteamAppTicket",
+                    path: "docs/prsteamworks/isteamappticket.md"
+                }
+            ]
         },
         {
             type: "file",
