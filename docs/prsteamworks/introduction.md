@@ -24,8 +24,8 @@
 | isteamapps.h                | ISteamApps                | STEAMAPPS\_INTERFACE\_VERSION`XXX`           |    001-009     |    001-009    | &check; |
 | isteamappticket.h           | ISteamAppTicket           | STEAMAPPTICKET_INTERFACE_VERSION`XXX`        |    001-001     |    001-001    | &check; |
 | isteamclient.h              | ISteamClient              | SteamClient`XXX`                             |    007-023     |    006-023    | &cross; |
-| isteamcontroller.h          | ISteamController          | ~                                            |       ~        |       ~       | &cross; |
-| isteamfriends.h             | ISteamFriends             | SteamFriends`XXX`                            |    003-018     |    001-018    | &check; |
+| isteamcontroller.h          | ISteamController          | ~                                            |       ~        |       ~       | &check; |
+| isteamfriends.h             | ISteamFriends             | SteamFriends`XXX`                            |    003-018     |    001-018    | &cross; |
 | isteamgamecoordinator.h     | ISteamGameCoordinator     | SteamGameCoordinator`XXX`                    |    001-001     |    001-001    | &cross; |
 | isteamgameserver.h          | ISteamGameServer          | SteamGameServer`XXX`                         |    004-015     |    002-015    | &cross; |
 | isteamgameserverstats.h     | ISteamGameServerStats     | SteamGameServerStats`XXX`                    |    001-001     |    001-001    | &cross; |

@@ -76,5 +76,5 @@ uint32 GetAppOwnershipTicketData(uint32 nAppID, void *pvBuffer, uint32 cbBufferL
 Копирует сырой буфер билета в `pvBuffer` и возвращает смещения ключевых полей внутри него.
 
 **Возвращает:** `uint32`\
-количество фактически записанных байт в `pvBuffer`.
+Количество фактически записанных байт в `pvBuffer`.
 <!-- #endregion -->
