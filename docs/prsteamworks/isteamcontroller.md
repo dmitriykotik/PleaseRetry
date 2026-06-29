@@ -336,12 +336,12 @@
 > Версия `~` в `PleaseRetrySteamworks` обозначается как:\
 > **Файл: `isteamcontroller000.h`**\
 > **Класс: `ISteamController000`**\
-> **Текст. название интерфейса в `define`: `STEAMCONTROLLER_INTERFACE_VERSION`**
+> **Текст. название интерфейса: `STEAMCONTROLLER_INTERFACE_VERSION`**
 >
 > Остальные версии обозначаются как обычно:\
 > **Файл: `isteamcontrollerXXX.h`**\
 > **Класс: `ISteamControllerXXX`**\
-> **Текст. название интерфейса в `define`: `SteamControllerXXX`**
+> **Текст. название интерфейса: `SteamControllerXXX`**
 > _(`XXX` - версия интерфейса)_
 
 <!-- #region Disclaimer -->
@@ -358,7 +358,7 @@
 class ISteamController;
 ```
 
-API ввода Steam
+API ввода Steam.
 
 ## Init `000`
 ```cpp
@@ -613,15 +613,321 @@ int GetAnalogActionOrigins(ControllerHandle_t controllerHandle, ControllerAction
 void StopAnalogActionMomentum(ControllerHandle_t controllerHandle, ControllerAnalogActionHandle_t eAction)
 ```
 
-| Название           | Тип                               | Описание                                                 |
-| :----------------- | :-------------------------------- | :------------------------------------------------------- |
-| `controllerHandle` | `ControllerHandle_t`              | Дескриптор контроллера, на который нужно воздействовать. |
-| `eAction`          | `ControllerAnalogActionHandle_t ` | Аналоговое действие, направленное на остановку импульса. |
+| Название           | Тип                              | Описание                                                 |
+| :----------------- | :------------------------------- | :------------------------------------------------------- |
+| `controllerHandle` | `ControllerHandle_t`             | Дескриптор контроллера, на который нужно воздействовать. |
+| `eAction`          | `ControllerAnalogActionHandle_t` | Аналоговое действие, направленное на остановку импульса. |
 
 Останавливает движение аналогового действия.
 
 **Возвращает:** `void`
 
-<!-- 20 -->
+## TriggerHapticPulse
+```cpp
+void TriggerHapticPulse(ControllerHandle_t controllerHandle, ESteamControllerPad eTargetPad, unsigned short usDurationMicroSec)
+```
+
+| Название             | Тип                   | Описание                                                      |
+| :------------------- | :-------------------- | :------------------------------------------------------------ |
+| `controllerHandle`   | `ControllerHandle_t`  | Дескриптор контроллера, на который нужно воздействовать.      |
+| `eTargetPad`         | `ESteamControllerPad` | На какую тактильную сенсорную панель следует воздействовать.  |
+| `usDurationMicroSec` | `unsigned short`      | Длительность импульса, в микросекундах (1/1 000 000 секунды). |
+
+Генерирует (низкоуровневый) тактильный импульс на поддерживаемых контроллерах.
+
+**Возвращает:** `void`
+
+## TriggerRepeatedHapticPulse
+```cpp
+void TriggerRepeatedHapticPulse(ControllerHandle_t controllerHandle, ESteamControllerPad eTargetPad, unsigned short usDurationMicroSec, unsigned short usOffMicroSec, unsigned short unRepeat, unsigned int nFlags)
+```
+
+| Название             | Тип                   | Описание                                                                     |
+| :------------------- | :-------------------- | :--------------------------------------------------------------------------- |
+| `controllerHandle`   | `ControllerHandle_t`  | Дескриптор контроллера, на который нужно воздействовать.                     |
+| `eTargetPad`         | `ESteamControllerPad` | На какую тактильную сенсорную панель следует воздействовать.                 |
+| `usDurationMicroSec` | `unsigned short`      | Длительность импульса, в микросекундах (1/1 000 000 секунды).                |
+| `usOffMicroSec`      | `unsigned short`      | Продолжительность паузы между импульсами, в микросекундах.                   |
+| `unRepeat`           | `unsigned short`      | Количество повторений рабочего цикла `usDurationMicroSec` / `usOffMicroSec`. |
+| `nFlags`             | `unsigned int`        | Сейчас не используется, сохранено для будущего использования.                |
+
+Активирует повторяемый импульс тактильной отдачи на поддерживаемых контроллерах.
+
+**Возвращает:** `void`
+
+## GetGamepadIndexForController
+```cpp
+int GetGamepadIndexForController(ControllerHandle_t ulControllerHandle)
+```
+
+| Название           | Тип                  | Описание                                                        |
+| :----------------- | :------------------- | :-------------------------------------------------------------- |
+| `controllerHandle` | `ControllerHandle_t` | Дескриптор контроллера, для которого вы хотите индекс геймпада. |
+
+Возвращает индекс связанного геймпада для указанного контроллера, если геймпад эмулируется.
+
+**Возвращает:** `int`
+
+## GetControllerForGamepadIndex
+```cpp
+ControllerHandle_t GetControllerForGamepadIndex(int nIndex)
+```
+
+| Название | Тип   | Описание                                                                                |
+| :------- | :---- | :-------------------------------------------------------------------------------------- |
+| `nIndex` | `int` | Индекс эмулированного геймпада, для которого вы хотите получить дескриптор контроллера. |
+
+Возвращает связанный дескриптор контроллера указанного эмулированного геймпада. Может использоваться с `GetInputTypeForHandle`, чтобы определить тип контроллера, использующего эмуляцию геймпадов системой ввода Steam.
+
+**Возвращает:** `ControllerHandle_t`
+
+## GetMotionData
+```cpp
+ControllerMotionData_t GetMotionData(ControllerHandle_t controllerHandle)
+```
+
+| Название           | Тип                  | Описание                                                                 |
+| :----------------- | :------------------- | :----------------------------------------------------------------------- |
+| `controllerHandle` | `ControllerHandle_t` | Дескриптор контроллера, для которого вы хотите получить данные движения. |
+
+Возвращает необработанные данные движения для указанного контроллера.
+
+**Возвращает:** `ControllerMotionData_t`
+
+## ShowDigitalActionOrigins
+```cpp
+bool ShowDigitalActionOrigins(ControllerHandle_t controllerHandle, ControllerDigitalActionHandle_t digitalActionHandle, float flScale, float flXPosition, float flYPosition)
+```
+
+| Название              | Тип                               | Описание                                                                    |
+| :-------------------- | :-------------------------------- | :-------------------------------------------------------------------------- |
+| `controllerHandle`    | `ControllerHandle_t`              | Дескриптор контроллера.                                                     |
+| `digitalActionHandle` | `ControllerDigitalActionHandle_t` | Дескриптор цифрового действия, физическую кнопку которого нужно отобразить. |
+| `flScale`             | `float`                           | Масштаб отображения иконки кнопки на экране.                                |
+| `flXPosition`         | `float`                           | Позиция иконки по оси X на экране.                                          |
+| `flYPosition`         | `float`                           | Позиция иконки по оси Y на экране.                                          |
+
+Показывает на экране физические подсказки управления - иконки кнопок геймпада, которые в данный момент привязаны к конкретному цифровому действию.
+
+**Возвращает:** `bool`\
+`true`, если подсказка успешно отображена, в противном случае `false`.
+
+## ShowAnalogActionOrigins
+```cpp
+bool ShowAnalogActionOrigins(ControllerHandle_t controllerHandle, ControllerAnalogActionHandle_t analogActionHandle, float flScale, float flXPosition, float flYPosition)
+```
+
+| Название             | Тип                              | Описание                                                                      |
+| :------------------- | :------------------------------- | :---------------------------------------------------------------------------- |
+| `controllerHandle`   | `ControllerHandle_t`             | Дескриптор контроллера.                                                       |
+| `analogActionHandle` | `ControllerAnalogActionHandle_t` | Дескриптор аналогового действия, физическую кнопку которого нужно отобразить. |
+| `flScale`            | `float`                          | Масштаб отображения иконки кнопки на экране.                                  |
+| `flXPosition`        | `float`                          | Позиция иконки по оси X на экране.                                            |
+| `flYPosition`        | `float`                          | Позиция иконки по оси Y на экране.                                            |
+
+Показывает на экране физические подсказки управления - иконки кнопок геймпада, которые в данный момент привязаны к конкретному аналоговому действию.
+
+**Возвращает:** `bool`\
+`true`, если подсказка успешно отображена, в противном случае `false`.
+
+## TriggerVibration
+```cpp
+void TriggerVibration(ControllerHandle_t controllerHandle, unsigned short usLeftSpeed, unsigned short usRightSpeed)
+```
+
+| Название           | Тип                  | Описание                                                     |
+| :----------------- | :------------------- | :----------------------------------------------------------- |
+| `controllerHandle` | `ControllerHandle_t` | Дескриптор контроллера, на который вы хотите воздействовать. |
+| `usLeftSpeed`      | `unsigned short`     | Значение уровня отдачи для левого моторчика вибрации.        |
+| `usRightSpeed`     | `unsigned short`     | Значение уровня отдачи для правого моторчика вибрации.       |
+
+Активирует вибрацию на поддерживаемых контроллерах.
+
+**Возвращает:** `void`
+
+## SetLEDColor
+```cpp
+void SetLEDColor(ControllerHandle_t controllerHandle, uint8 nColorR, uint8 nColorG, uint8 nColorB, unsigned int nFlags)
+```
+
+| Название           | Тип                  | Описание                                                                                           |
+| :----------------- | :------------------- | :------------------------------------------------------------------------------------------------- |
+| `controllerHandle` | `ControllerHandle_t` | Дескриптор контроллера, на который вы хотите воздействовать.                                       |
+| `nColorR`          | `uint8`              | Устанавливаемый красный компонент цвета (0-255).                                                   |
+| `nColorG`          | `uint8`              | Устанавливаемый зелёный компонент цвета (0-255).                                                   |
+| `nColorB`          | `uint8`              | Устанавливаемый синий компонент цвета (0-255).                                                     |
+| `nFlags`           | `unsigned int`       | Флаги в виде битовых масок, объединённые со значениями, определёнными в `ESteamControllerLEDFlag`. |
+
+Устанавливает цвет светодиодов на поддерживаемых контроллерах.
+
+**Возвращает:** `void`
+
+## GetStringForActionOrigin
+```cpp
+const char *GetStringForActionOrigin(EControllerActionOrigin eOrigin)
+```
+
+| Название  | Тип                       | Описание |
+| :-------- | :------------------------ | :------: |
+| `eOrigin` | `EControllerActionOrigin` |    -     |
+
+Возвращает локализованную строку (из языковых настроек Steam) для указанного источника ввода.
+
+**Возвращает:** `const char *`
+
+## GetGlyphForActionOrigin
+```cpp
+const char *GetGlyphForActionOrigin(EControllerActionOrigin eOrigin)
+```
+
+| Название  | Тип                       | Описание |
+| :-------- | :------------------------ | :------: |
+| `eOrigin` | `EControllerActionOrigin` |    -     |
+
+Получает локальный путь к изображению экранной подсказки для определённого источника (origin).
+
+**Возвращает:** `const char *`\
+Путь к PNG-файлу иконки.
+Например, `C:\Program Files (x86)\Steam\tenfoot\resource\images\library\controller\api\ps4_button_x.png`
+
+## ActivateActionSetLayer
+```cpp
+void ActivateActionSetLayer(ControllerHandle_t controllerHandle, ControllerActionSetHandle_t actionSetLayerHandle)
+```
+
+| Название               | Тип                           | Описание                                                                          |
+| :--------------------- | :---------------------------- | :-------------------------------------------------------------------------------- |
+| `controllerHandle`     | `ControllerHandle_t`          | Дескриптор контроллера, для которого вы хотите активировать слой набора действий. |
+| `actionSetLayerHandle` | `ControllerActionSetHandle_t` | Дескриптор слоя набора действий, который вы хотите активировать.                  |
+
+Перенастройте контроллер для использования указанного слоя набора действий.
+
+**Возвращает:** `void`
+
+## DeactivateActionSetLayer
+```cpp
+void DeactivateActionSetLayer(ControllerHandle_t controllerHandle, ControllerActionSetHandle_t actionSetLayerHandle)
+```
+
+| Название               | Тип                           | Описание                                                                            |
+| :--------------------- | :---------------------------- | :---------------------------------------------------------------------------------- |
+| `controllerHandle`     | `ControllerHandle_t`          | Дескриптор контроллера, для которого вы хотите деактивировать слой набора действий. |
+| `actionSetLayerHandle` | `ControllerActionSetHandle_t` | Дескриптор слоя набора действий, который вы хотите деактивировать.                  |
+
+Перенастройте контроллер, чтобы прекратить использование указанного слоя набора действий.
+
+**Возвращает:** `void`
+
+## DeactivateAllActionSetLayers
+```cpp
+void DeactivateAllActionSetLayers(ControllerHandle_t controllerHandle)
+```
+
+| Название           | Тип                  | Описание                                                                                |
+| :----------------- | :------------------- | :-------------------------------------------------------------------------------------- |
+| `controllerHandle` | `ControllerHandle_t` | Дескриптор контроллера, для которого вы хотите деактивировать все слои набора действий. |
+
+Перенастройте контроллер, чтобы прекратить использование всех слоёв набора действий.
+
+**Возвращает:** `void`
+
+## GetActiveActionSetLayers
+```cpp
+int GetActiveActionSetLayers(ControllerHandle_t controllerHandle, ControllerActionSetHandle_t *handlesOut)
+```
+
+| Название           | Тип                             | Описание                                                                                        |
+| :----------------- | :------------------------------ | :---------------------------------------------------------------------------------------------- |
+| `controllerHandle` | `ControllerHandle_t`            | Дескриптор контроллера, для которого вы хотите получить слои набора действий.                   |
+| `handlesOut`       | `ControllerActionSetHandle_t *` | Должно указывать на массив `ControllerHandle_t` размером `STEAM_CONTROLLER_MAX_COUNT` _(= 16)_. |
+
+Заполните массив всеми активными в текущий момент слоями набора действий для дескриптора определённого контроллера.
+
+**Возвращает:** `int`
+
+## GetInputTypeForHandle
+```cpp
+ESteamInputType GetInputTypeForHandle(ControllerHandle_t controllerHandle)
+```
+
+| Название           | Тип                  | Описание                                                                       |
+| :----------------- | :------------------- | :----------------------------------------------------------------------------- |
+| `controllerHandle` | `ControllerHandle_t` | Дескриптор контроллера, чей тип ввода (модель устройства) вы хотите запросить. |
+
+Возвращает тип вода (модель устройства) указанного контроллера. Сообщает, является ли данный контроллер Steam Controller, Xbox 360, PS4 и т. д.
+
+**Возвращает:** `ESteamInputType`
+
+## GetStringForXboxOrigin
+```cpp
+const char *GetStringForXboxOrigin(EXboxOrigin eOrigin)
+```
+
+| Название  | Тип           | Описание |
+| :-------- | :------------ | :------: |
+| `eOrigin` | `EXboxOrigin` |    -     |
+
+Возвращает локализованную строку (из языковых настроек Steam) для указанного источника ввода.
+
+**Возвращает:** `const char *`
+
+## GetGlyphForXboxOrigin
+```cpp
+const char *GetGlyphForXboxOrigin(EXboxOrigin eOrigin)
+```
+
+| Название  | Тип           | Описание |
+| :-------- | :------------ | :------: |
+| `eOrigin` | `EXboxOrigin` |    -     |
+
+Получает локальный путь к изображению экранной подсказки для определённого источника (origin).
+
+**Возвращает:** `const char *`\
+Путь к PNG-файлу иконки.
+Например, `C:\Program Files (x86)\Steam\tenfoot\resource\images\library\controller\api\xbox_button_x.png`
+
+## GetActionOriginFromXboxOrigin
+```cpp
+EControllerActionOrigin GetActionOriginFromXboxOrigin(ControllerHandle_t controllerHandle, EXboxOrigin eOrigin)
+```
+
+| Название           | Тип                  | Описание                                                                             |
+| :----------------- | :------------------- | :----------------------------------------------------------------------------------- |
+| `controllerHandle` | `ControllerHandle_t` | Дескриптор контроллера, на который вы хотите воздействовать.                         |
+| `eOrigin`          | `EXboxOrigin`        | Это кнопка, для которой вы хотите получить изображение, например: `k_EXboxOrigin_A`. |
+
+Получает источник действия, который можно использовать для поиска по таблице иконок или передать функциям `GetGlyphForActionOrigin` и `GetStringForActionOrigin`.
+
+**Возвращает:** `EControllerActionOrigin`
+
+## TranslateActionOrigin
+```cpp
+EControllerActionOrigin TranslateActionOrigin(ESteamInputType eDestinationInputType, EControllerActionOrigin eSourceOrigin)
+```
+
+| Название                | Тип                       | Описание                                               |
+| :---------------------- | :------------------------ | :----------------------------------------------------- |
+| `eDestinationInputType` | `ESteamInputType`         | Тип контроллера, для которого вы адаптируете действие. |
+| `eSourceOrigin`         | `EControllerActionOrigin` | Кнопка, которую вы адаптируете.                        |
+
+Получает эквивалент источника для данного или максимально похожего типа контроллера из SDK в вашей игре, если значение параметра `eDestinationInputType` равно `k_ESteamInputType_Unknown`.
+
+**Возвращает:** `EControllerActionOrigin`
+
+## GetControllerBindingRevision
+```cpp
+bool GetControllerBindingRevision(ControllerHandle_t controllerHandle, int *pMajor, int *pMinor)
+```
+
+| Название           | Тип                  | Описание                                                                |
+| :----------------- | :------------------- | :---------------------------------------------------------------------- |
+| `controllerHandle` | `ControllerHandle_t` | Дескриптор контроллера, о котором запрашивается информация.             |
+| `pMajor`           | `int *`              | Указатель на int, куда будет добавлена основная версия раскладки.       |
+| `pMinor`           | `int *`              | Указатель на int, куда будет добавлена второстепенная версия раскладки. |
+
+Получает основную и второстепенную версии раскладок устройств для API ввода Steam. Второстепенные версии предназначены для небольших изменений, например добавления нового необязательного действия или обновления локализации. При обновлении второстепенной версии необходимо обновить только одну новую раскладку с поставленной галочкой «Использовать блок действий». Основные версии раскладок предназначены для случаев, когда меняется число наборов действий или раскладки обновляются таким образом, что предыдущие версии больше нельзя использовать. Steam принудительно обновит раскладку пользователя, если она отличается от основной версии текущей официальной раскладки. При обновлении основной версии необходимо будет создать новые раскладки для каждого контроллера.
+
+**Возвращает:** `bool`\
+`true`, если раскладка успешно найдена, в противном случае `false`.
 
 <!-- #endregion -->
