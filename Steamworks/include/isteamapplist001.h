@@ -17,12 +17,14 @@
 
 #include "isteamapplist.h"
 
-class ISteamAppList001 : public ISteamAppList {
+class ISteamAppList001 {
 public:
 	virtual uint32 GetNumInstalledApps() = 0;
+
 	virtual uint32 GetInstalledApps(AppId_t *pvecAppID, uint32 unMaxAppIDs) = 0;
 
 	virtual int  GetAppName(AppId_t nAppID, char *pchName, int cchNameMax) = 0;
+	
 	virtual int  GetAppInstallDir(AppId_t nAppID, char *pchDirectory, int cchNameMax) = 0;
 
 	virtual int GetAppBuildId(AppId_t nAppID) = 0;

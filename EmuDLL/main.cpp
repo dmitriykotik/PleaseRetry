@@ -16,3 +16,5 @@
 //
 // It's just a temporary file
 //
+
+#include "isteamapplist.h"

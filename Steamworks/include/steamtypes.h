@@ -15,28 +15,26 @@
 
 #pragma once
 
-#define S_CALLTYPE __cdecl
+#include <cstdint>
 
-#if defined(_WIN64) || defined(_M_X64) || defined(__x86_64__)
-    #define X64BITS
+#if !defined(PR_BIG_ENDIAN)
+    #if defined(__GNUC__) && __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__
+        #define PR_BIG_ENDIAN 1
+    #endif
 #endif
 
-typedef unsigned char uint8;
-typedef signed char int8;
-typedef short int16;
-typedef unsigned short uint16;
-typedef int int32;
-typedef unsigned int uint32;
-typedef __int64 int64;
-typedef unsigned __int64 uint64;
+typedef std::int8_t int8;
+typedef std::int16_t int16;
+typedef std::int32_t int32;
+typedef std::int64_t int64;
 
-#ifdef X64BITS
-    typedef __int64 intp;
-    typedef unsigned __int64 uintp;
-#else
-    typedef __int32 intp;
-    typedef unsigned __int32 uintp;
-#endif
+typedef std::uint8_t uint8;
+typedef std::uint16_t uint16;
+typedef std::uint32_t uint32;
+typedef std::uint64_t uint64;
+
+typedef std::intptr_t intp;
+typedef std::uintptr_t uintp;
 
 typedef uint32 AppId_t;
 typedef uint32 DepotId_t;
@@ -51,15 +49,13 @@ const SteamAPICall_t k_uAPICallInvalid = 0x0;
 const AccountID_t k_uAccountIdInvalid = 0;
 const PartyBeaconID_t k_ulPartyBeaconIdInvalid = 0;
 
-enum ESteamIPType
-{
+enum ESteamIPType {
     k_ESteamIPTypeIPv4 = 0,
     k_ESteamIPTypeIPv6 = 1,
 };
 
 #pragma pack(push, 1)
-struct SteamIPAddress_t
-{
+struct SteamIPAddress_t {
     union {
         uint32 m_unIPv4;
         uint8  m_rgubIPv6[16];
@@ -68,24 +64,21 @@ struct SteamIPAddress_t
 
     ESteamIPType m_eType;
 
-    bool IsSet() const 
-    { 
+    bool IsSet() const { 
         if (k_ESteamIPTypeIPv4 == m_eType)
             return m_unIPv4 != 0;
         else 
             return m_ipv6Qword[0] != 0 || m_ipv6Qword[1] != 0; 
     }
 
-    static SteamIPAddress_t IPv4Any()
-    {
+    static SteamIPAddress_t IPv4Any() {
         SteamIPAddress_t ipOut;
         ipOut.m_eType = k_ESteamIPTypeIPv4;
         ipOut.m_unIPv4 = 0;
         return ipOut;
     }
 
-    static SteamIPAddress_t IPv6Any()
-    {
+    static SteamIPAddress_t IPv6Any() {
         SteamIPAddress_t ipOut;
         ipOut.m_eType = k_ESteamIPTypeIPv6;
         ipOut.m_ipv6Qword[0] = 0;
@@ -93,16 +86,14 @@ struct SteamIPAddress_t
         return ipOut;
     }
 
-    static SteamIPAddress_t IPv4Loopback()
-    {
+    static SteamIPAddress_t IPv4Loopback() {
         SteamIPAddress_t ipOut;
         ipOut.m_eType = k_ESteamIPTypeIPv4;
         ipOut.m_unIPv4 = 0x7f000001;
         return ipOut;
     }
 
-    static SteamIPAddress_t IPv6Loopback()
-    {
+    static SteamIPAddress_t IPv6Loopback() {
         SteamIPAddress_t ipOut;
         ipOut.m_eType = k_ESteamIPTypeIPv6;
         ipOut.m_ipv6Qword[0] = 0;

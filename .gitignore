@@ -462,3 +462,7 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+# Temp files
+/Steamworks/include/*.txt
+/Steamworks/include/*.py

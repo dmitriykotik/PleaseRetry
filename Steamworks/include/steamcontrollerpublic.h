@@ -53,9 +53,7 @@ enum EControllerSourceMode {
 	k_EControllerSourceMode_MouseRegion
 };
 
-enum EControllerActionOrigin
-{
-	// Steam Controller
+enum EControllerActionOrigin {
 	k_EControllerActionOrigin_None,
 	k_EControllerActionOrigin_A,
 	k_EControllerActionOrigin_B,
@@ -96,7 +94,6 @@ enum EControllerActionOrigin
 	k_EControllerActionOrigin_Gyro_Yaw,
 	k_EControllerActionOrigin_Gyro_Roll,
 	
-	// PS4 Dual Shock
 	k_EControllerActionOrigin_PS4_X,
 	k_EControllerActionOrigin_PS4_Circle,
 	k_EControllerActionOrigin_PS4_Triangle,
@@ -151,7 +148,6 @@ enum EControllerActionOrigin
 	k_EControllerActionOrigin_PS4_Gyro_Yaw,
 	k_EControllerActionOrigin_PS4_Gyro_Roll,
 
-	// XBox One
 	k_EControllerActionOrigin_XBoxOne_A,
 	k_EControllerActionOrigin_XBoxOne_B,
 	k_EControllerActionOrigin_XBoxOne_X,
@@ -181,7 +177,6 @@ enum EControllerActionOrigin
 	k_EControllerActionOrigin_XBoxOne_DPad_West,
 	k_EControllerActionOrigin_XBoxOne_DPad_East,
 
-	// XBox 360
 	k_EControllerActionOrigin_XBox360_A,
 	k_EControllerActionOrigin_XBox360_B,
 	k_EControllerActionOrigin_XBox360_X,
@@ -211,7 +206,6 @@ enum EControllerActionOrigin
 	k_EControllerActionOrigin_XBox360_DPad_West,
 	k_EControllerActionOrigin_XBox360_DPad_East,	
 
-	// SteamController V2
 	k_EControllerActionOrigin_SteamV2_A,
 	k_EControllerActionOrigin_SteamV2_B,
 	k_EControllerActionOrigin_SteamV2_X,
@@ -261,8 +255,6 @@ enum EControllerActionOrigin
 	k_EControllerActionOrigin_SteamV2_Gyro_Yaw,
 	k_EControllerActionOrigin_SteamV2_Gyro_Roll,
 
-	// Switch - Pro or Joycons used as a single input device.
-	// This does not apply to a single joycon
 	k_EControllerActionOrigin_Switch_A,
 	k_EControllerActionOrigin_Switch_B,
 	k_EControllerActionOrigin_Switch_X,
@@ -296,7 +288,6 @@ enum EControllerActionOrigin
 	k_EControllerActionOrigin_Switch_ProGyro_Pitch,
 	k_EControllerActionOrigin_Switch_ProGyro_Yaw,
 	k_EControllerActionOrigin_Switch_ProGyro_Roll,
-	// Switch JoyCon Specific
 	k_EControllerActionOrigin_Switch_RightGyro_Move,
 	k_EControllerActionOrigin_Switch_RightGyro_Pitch,
 	k_EControllerActionOrigin_Switch_RightGyro_Yaw,
@@ -310,7 +301,6 @@ enum EControllerActionOrigin
 	k_EControllerActionOrigin_Switch_RightGrip_Lower,
 	k_EControllerActionOrigin_Switch_RightGrip_Upper,
 
-	// Added in SDK 1.45
 	k_EControllerActionOrigin_PS4_DPad_Move,
 	k_EControllerActionOrigin_XBoxOne_DPad_Move,
 	k_EControllerActionOrigin_XBox360_DPad_Move,
@@ -327,8 +317,7 @@ typedef uint64 ControllerActionSetHandle_t;
 typedef uint64 ControllerDigitalActionHandle_t;
 typedef uint64 ControllerAnalogActionHandle_t;
 
-enum EXboxOrigin
-{
+enum EXboxOrigin {
 	k_EXboxOrigin_A,
 	k_EXboxOrigin_B,
 	k_EXboxOrigin_X,

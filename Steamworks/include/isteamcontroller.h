@@ -18,8 +18,4 @@
 #include "steamtypes.h"
 #include "steamcontrollerpublic.h"
 
-class ISteamController {
-protected:
-    ISteamController() {};
-    ~ISteamController() {};
-};
+class ISteamController;

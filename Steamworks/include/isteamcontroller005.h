@@ -17,9 +17,10 @@
 
 #include "isteamcontroller.h"
 
-class ISteamController005 : public ISteamController {
+class ISteamController005 {
 public:
     virtual bool Init() = 0;
+
 	virtual bool Shutdown() = 0;
 	
 	virtual void RunFrame() = 0;
@@ -31,6 +32,7 @@ public:
 	virtual ControllerActionSetHandle_t GetActionSetHandle(const char *pszActionSetName) = 0;
 	
 	virtual void ActivateActionSet(ControllerHandle_t controllerHandle, ControllerActionSetHandle_t actionSetHandle) = 0;
+
 	virtual ControllerActionSetHandle_t GetCurrentActionSet(ControllerHandle_t controllerHandle) = 0;
 	
 	virtual ControllerDigitalActionHandle_t GetDigitalActionHandle(const char *pszActionName) = 0;
@@ -62,6 +64,7 @@ public:
 	virtual ControllerMotionData_t GetMotionData(ControllerHandle_t controllerHandle) = 0;
 	
 	virtual bool ShowDigitalActionOrigins(ControllerHandle_t controllerHandle, ControllerDigitalActionHandle_t digitalActionHandle, float flScale, float flXPosition, float flYPosition) = 0;
+	
 	virtual bool ShowAnalogActionOrigins(ControllerHandle_t controllerHandle, ControllerAnalogActionHandle_t analogActionHandle, float flScale, float flXPosition, float flYPosition) = 0;
 
 	virtual const char *GetStringForActionOrigin(EControllerActionOrigin eOrigin) = 0;

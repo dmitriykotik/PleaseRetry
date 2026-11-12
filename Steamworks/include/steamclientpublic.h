@@ -18,142 +18,142 @@
 #include "steamtypes.h"
 #include "steamuniverse.h"
 
-/*
+
 enum EResult {
 	k_EResultNone = 0,
 	k_EResultOK	= 1,
 	k_EResultFail = 2,
 	k_EResultNoConnection = 3,
 //	k_EResultNoConnectionRetry = 4,
-	k_EResultInvalidPassword = 5,				// password/ticket is invalid
-	k_EResultLoggedInElsewhere = 6,				// same user logged in elsewhere
-	k_EResultInvalidProtocolVer = 7,			// protocol version is incorrect
-	k_EResultInvalidParam = 8,					// a parameter is incorrect
-	k_EResultFileNotFound = 9,					// file was not found
-	k_EResultBusy = 10,							// called method busy - action not taken
-	k_EResultInvalidState = 11,					// called object was in an invalid state
-	k_EResultInvalidName = 12,					// name is invalid
-	k_EResultInvalidEmail = 13,					// email is invalid
-	k_EResultDuplicateName = 14,				// name is not unique
-	k_EResultAccessDenied = 15,					// access is denied
-	k_EResultTimeout = 16,						// operation timed out
-	k_EResultBanned = 17,						// VAC2 banned
-	k_EResultAccountNotFound = 18,				// account not found
-	k_EResultInvalidSteamID = 19,				// steamID is invalid
-	k_EResultServiceUnavailable = 20,			// The requested service is currently unavailable
-	k_EResultNotLoggedOn = 21,					// The user is not logged on
-	k_EResultPending = 22,						// Request is pending (may be in process, or waiting on third party)
-	k_EResultEncryptionFailure = 23,			// Encryption or Decryption failed
-	k_EResultInsufficientPrivilege = 24,		// Insufficient privilege
-	k_EResultLimitExceeded = 25,				// Too much of a good thing
-	k_EResultRevoked = 26,						// Access has been revoked (used for revoked guest passes)
-	k_EResultExpired = 27,						// License/Guest pass the user is trying to access is expired
-	k_EResultAlreadyRedeemed = 28,				// Guest pass has already been redeemed by account, cannot be acked again
-	k_EResultDuplicateRequest = 29,				// The request is a duplicate and the action has already occurred in the past, ignored this time
-	k_EResultAlreadyOwned = 30,					// All the games in this guest pass redemption request are already owned by the user
-	k_EResultIPNotFound = 31,					// IP address not found
-	k_EResultPersistFailed = 32,				// failed to write change to the data store
-	k_EResultLockingFailed = 33,				// failed to acquire access lock for this operation
+	k_EResultInvalidPassword = 5,
+	k_EResultLoggedInElsewhere = 6,
+	k_EResultInvalidProtocolVer = 7,
+	k_EResultInvalidParam = 8,
+	k_EResultFileNotFound = 9,
+	k_EResultBusy = 10,
+	k_EResultInvalidState = 11,
+	k_EResultInvalidName = 12,
+	k_EResultInvalidEmail = 13,
+	k_EResultDuplicateName = 14,
+	k_EResultAccessDenied = 15,
+	k_EResultTimeout = 16,
+	k_EResultBanned = 17,
+	k_EResultAccountNotFound = 18,
+	k_EResultInvalidSteamID = 19,
+	k_EResultServiceUnavailable = 20,
+	k_EResultNotLoggedOn = 21,
+	k_EResultPending = 22,
+	k_EResultEncryptionFailure = 23,
+	k_EResultInsufficientPrivilege = 24,
+	k_EResultLimitExceeded = 25,
+	k_EResultRevoked = 26,
+	k_EResultExpired = 27,
+	k_EResultAlreadyRedeemed = 28,
+	k_EResultDuplicateRequest = 29,
+	k_EResultAlreadyOwned = 30,
+	k_EResultIPNotFound = 31,
+	k_EResultPersistFailed = 32,
+	k_EResultLockingFailed = 33,
 	k_EResultLogonSessionReplaced = 34,
 	k_EResultConnectFailed = 35,
 	k_EResultHandshakeFailed = 36,
 	k_EResultIOFailure = 37,
 	k_EResultRemoteDisconnect = 38,
-	k_EResultShoppingCartNotFound = 39,			// failed to find the shopping cart requested
-	k_EResultBlocked = 40,						// a user didn't allow it
-	k_EResultIgnored = 41,						// target is ignoring sender
-	k_EResultNoMatch = 42,						// nothing matching the request found
+	k_EResultShoppingCartNotFound = 39,
+	k_EResultBlocked = 40,
+	k_EResultIgnored = 41,
+	k_EResultNoMatch = 42,
 	k_EResultAccountDisabled = 43,
-	k_EResultServiceReadOnly = 44,				// this service is not accepting content changes right now
-	k_EResultAccountNotFeatured = 45,			// account doesn't have value, so this feature isn't available
-	k_EResultAdministratorOK = 46,				// allowed to take this action, but only because requester is admin
-	k_EResultContentVersion = 47,				// A Version mismatch in content transmitted within the Steam protocol.
-	k_EResultTryAnotherCM = 48,					// The current CM can't service the user making a request, user should try another.
-	k_EResultPasswordRequiredToKickSession = 49,// You are already logged in elsewhere, this cached credential login has failed.
-	k_EResultAlreadyLoggedInElsewhere = 50,		// You are already logged in elsewhere, you must wait
-	k_EResultSuspended = 51,					// Long running operation (content download) suspended/paused
-	k_EResultCancelled = 52,					// Operation canceled (typically by user: content download)
-	k_EResultDataCorruption = 53,				// Operation canceled because data is ill formed or unrecoverable
-	k_EResultDiskFull = 54,						// Operation canceled - not enough disk space.
-	k_EResultRemoteCallFailed = 55,				// an remote call or IPC call failed
-	k_EResultPasswordUnset = 56,				// Password could not be verified as it's unset server side
-	k_EResultExternalAccountUnlinked = 57,		// External account (PSN, Facebook...) is not linked to a Steam account
-	k_EResultPSNTicketInvalid = 58,				// PSN ticket was invalid
-	k_EResultExternalAccountAlreadyLinked = 59,	// External account (PSN, Facebook...) is already linked to some other account, must explicitly request to replace/delete the link first
-	k_EResultRemoteFileConflict = 60,			// The sync cannot resume due to a conflict between the local and remote files
-	k_EResultIllegalPassword = 61,				// The requested new password is not legal
-	k_EResultSameAsPreviousValue = 62,			// new value is the same as the old one ( secret question and answer )
-	k_EResultAccountLogonDenied = 63,			// account login denied due to 2nd factor authentication failure
-	k_EResultCannotUseOldPassword = 64,			// The requested new password is not legal
-	k_EResultInvalidLoginAuthCode = 65,			// account login denied due to auth code invalid
-	k_EResultAccountLogonDeniedNoMail = 66,		// account login denied due to 2nd factor auth failure - and no mail has been sent - partner site specific
-	k_EResultHardwareNotCapableOfIPT = 67,		// 
-	k_EResultIPTInitError = 68,					// 
-	k_EResultParentalControlRestricted = 69,	// operation failed due to parental control restrictions for current user
-	k_EResultFacebookQueryError = 70,			// Facebook query returned an error
-	k_EResultExpiredLoginAuthCode = 71,			// account login denied due to auth code expired
+	k_EResultServiceReadOnly = 44,
+	k_EResultAccountNotFeatured = 45,
+	k_EResultAdministratorOK = 46,
+	k_EResultContentVersion = 47,
+	k_EResultTryAnotherCM = 48,
+	k_EResultPasswordRequiredToKickSession = 49,
+	k_EResultAlreadyLoggedInElsewhere = 50,
+	k_EResultSuspended = 51,
+	k_EResultCancelled = 52,
+	k_EResultDataCorruption = 53,
+	k_EResultDiskFull = 54,
+	k_EResultRemoteCallFailed = 55,
+	k_EResultPasswordUnset = 56,
+	k_EResultExternalAccountUnlinked = 57,
+	k_EResultPSNTicketInvalid = 58,
+	k_EResultExternalAccountAlreadyLinked = 59,
+	k_EResultRemoteFileConflict = 60,
+	k_EResultIllegalPassword = 61,
+	k_EResultSameAsPreviousValue = 62,
+	k_EResultAccountLogonDenied = 63,
+	k_EResultCannotUseOldPassword = 64,
+	k_EResultInvalidLoginAuthCode = 65,
+	k_EResultAccountLogonDeniedNoMail = 66,
+	k_EResultHardwareNotCapableOfIPT = 67,
+	k_EResultIPTInitError = 68,
+	k_EResultParentalControlRestricted = 69,
+	k_EResultFacebookQueryError = 70,
+	k_EResultExpiredLoginAuthCode = 71,
 	k_EResultIPLoginRestrictionFailed = 72,
 	k_EResultAccountLockedDown = 73,
 	k_EResultAccountLogonDeniedVerifiedEmailRequired = 74,
 	k_EResultNoMatchingURL = 75,
-	k_EResultBadResponse = 76,					// parse failure, missing field, etc.
-	k_EResultRequirePasswordReEntry = 77,		// The user cannot complete the action until they re-enter their password
-	k_EResultValueOutOfRange = 78,				// the value entered is outside the acceptable range
-	k_EResultUnexpectedError = 79,				// something happened that we didn't expect to ever happen
-	k_EResultDisabled = 80,						// The requested service has been configured to be unavailable
-	k_EResultInvalidCEGSubmission = 81,			// The set of files submitted to the CEG server are not valid !
-	k_EResultRestrictedDevice = 82,				// The device being used is not allowed to perform this action
-	k_EResultRegionLocked = 83,					// The action could not be complete because it is region restricted
-	k_EResultRateLimitExceeded = 84,			// Temporary rate limit exceeded, try again later, different from k_EResultLimitExceeded which may be permanent
-	k_EResultAccountLoginDeniedNeedTwoFactor = 85,	// Need two-factor code to login
-	k_EResultItemDeleted = 86,					// The thing we're trying to access has been deleted
-	k_EResultAccountLoginDeniedThrottle = 87,	// login attempt failed, try to throttle response to possible attacker
-	k_EResultTwoFactorCodeMismatch = 88,		// two factor code mismatch
-	k_EResultTwoFactorActivationCodeMismatch = 89,	// activation code for two-factor didn't match
-	k_EResultAccountAssociatedToMultiplePartners = 90,	// account has been associated with multiple partners
-	k_EResultNotModified = 91,					// data not modified
-	k_EResultNoMobileDevice = 92,				// the account does not have a mobile device associated with it
-	k_EResultTimeNotSynced = 93,				// the time presented is out of range or tolerance
-	k_EResultSmsCodeFailed = 94,				// SMS code failure (no match, none pending, etc.)
-	k_EResultAccountLimitExceeded = 95,			// Too many accounts access this resource
-	k_EResultAccountActivityLimitExceeded = 96,	// Too many changes to this account
-	k_EResultPhoneActivityLimitExceeded = 97,	// Too many changes to this phone
-	k_EResultRefundToWallet = 98,				// Cannot refund to payment method, must use wallet
-	k_EResultEmailSendFailure = 99,				// Cannot send an email
-	k_EResultNotSettled = 100,					// Can't perform operation till payment has settled
-	k_EResultNeedCaptcha = 101,					// Needs to provide a valid captcha
-	k_EResultGSLTDenied = 102,					// a game server login token owned by this token's owner has been banned
-	k_EResultGSOwnerDenied = 103,				// game server owner is denied for other reason (account lock, community ban, vac ban, missing phone)
-	k_EResultInvalidItemType = 104,				// the type of thing we were requested to act on is invalid
-	k_EResultIPBanned = 105,					// the ip address has been banned from taking this action
-	k_EResultGSLTExpired = 106,					// this token has expired from disuse; can be reset for use
-	k_EResultInsufficientFunds = 107,			// user doesn't have enough wallet funds to complete the action
-	k_EResultTooManyPending = 108,				// There are too many of this thing pending already
-	k_EResultNoSiteLicensesFound = 109,			// No site licenses found
-	k_EResultWGNetworkSendExceeded = 110,		// the WG couldn't send a response because we exceeded max network send size
-	k_EResultAccountNotFriends = 111,			// the user is not mutually friends
-	k_EResultLimitedUserAccount = 112,			// the user is limited
-	k_EResultCantRemoveItem = 113,				// item can't be removed
-	k_EResultAccountDeleted = 114,				// account has been deleted
-	k_EResultExistingUserCancelledLicense = 115,	// A license for this already exists, but cancelled
-	k_EResultCommunityCooldown = 116,			// access is denied because of a community cooldown (probably from support profile data resets)
-	k_EResultNoLauncherSpecified = 117,			// No launcher was specified, but a launcher was needed to choose correct realm for operation.
-	k_EResultMustAgreeToSSA = 118,				// User must agree to china SSA or global SSA before login
-	k_EResultLauncherMigrated = 119,			// The specified launcher type is no longer supported; the user should be directed elsewhere
-	k_EResultSteamRealmMismatch = 120,			// The user's realm does not match the realm of the requested resource
-	k_EResultInvalidSignature = 121,			// signature check did not match
-	k_EResultParseFailure = 122,				// Failed to parse input
-	k_EResultNoVerifiedPhone = 123,				// account does not have a verified phone number
-	k_EResultInsufficientBattery = 124,			// user device doesn't have enough battery charge currently to complete the action
-	k_EResultChargerRequired = 125,				// The operation requires a charger to be plugged in, which wasn't present
-	k_EResultCachedCredentialInvalid = 126,		// Cached credential was invalid - user must reauthenticate
-	K_EResultPhoneNumberIsVOIP = 127,			// The phone number provided is a Voice Over IP number
-	k_EResultNotSupported = 128,				// The data being accessed is not supported by this API
-	k_EResultFamilySizeLimitExceeded = 129,		// Reached the maximum size of the family
+	k_EResultBadResponse = 76,
+	k_EResultRequirePasswordReEntry = 77,
+	k_EResultValueOutOfRange = 78,
+	k_EResultUnexpectedError = 79,
+	k_EResultDisabled = 80,
+	k_EResultInvalidCEGSubmission = 81,
+	k_EResultRestrictedDevice = 82,
+	k_EResultRegionLocked = 83,
+	k_EResultRateLimitExceeded = 84,
+	k_EResultAccountLoginDeniedNeedTwoFactor = 85,
+	k_EResultItemDeleted = 86,
+	k_EResultAccountLoginDeniedThrottle = 87,
+	k_EResultTwoFactorCodeMismatch = 88,
+	k_EResultTwoFactorActivationCodeMismatch = 89,
+	k_EResultAccountAssociatedToMultiplePartners = 90,
+	k_EResultNotModified = 91,
+	k_EResultNoMobileDevice = 92,
+	k_EResultTimeNotSynced = 93,
+	k_EResultSmsCodeFailed = 94,
+	k_EResultAccountLimitExceeded = 95,
+	k_EResultAccountActivityLimitExceeded = 96,
+	k_EResultPhoneActivityLimitExceeded = 97,
+	k_EResultRefundToWallet = 98,
+	k_EResultEmailSendFailure = 99,
+	k_EResultNotSettled = 100,
+	k_EResultNeedCaptcha = 101,
+	k_EResultGSLTDenied = 102,
+	k_EResultGSOwnerDenied = 103,
+	k_EResultInvalidItemType = 104,
+	k_EResultIPBanned = 105,
+	k_EResultGSLTExpired = 106,
+	k_EResultInsufficientFunds = 107,
+	k_EResultTooManyPending = 108,
+	k_EResultNoSiteLicensesFound = 109,
+	k_EResultWGNetworkSendExceeded = 110,
+	k_EResultAccountNotFriends = 111,
+	k_EResultLimitedUserAccount = 112,
+	k_EResultCantRemoveItem = 113,
+	k_EResultAccountDeleted = 114,
+	k_EResultExistingUserCancelledLicense = 115,
+	k_EResultCommunityCooldown = 116,
+	k_EResultNoLauncherSpecified = 117,
+	k_EResultMustAgreeToSSA = 118,
+	k_EResultLauncherMigrated = 119,
+	k_EResultSteamRealmMismatch = 120,
+	k_EResultInvalidSignature = 121,
+	k_EResultParseFailure = 122,
+	k_EResultNoVerifiedPhone = 123,
+	k_EResultInsufficientBattery = 124,
+	k_EResultChargerRequired = 125,
+	k_EResultCachedCredentialInvalid = 126,
+	K_EResultPhoneNumberIsVOIP = 127,
+	k_EResultNotSupported = 128,
+	k_EResultFamilySizeLimitExceeded = 129,
 	k_EResultOfflineAppCacheInvalid = 130,
 	k_EResultTryLater = 131,
 };
-*/
+
 
 /*
 enum EVoiceResult {
@@ -192,10 +192,10 @@ enum EDenyReason {
 };
 */
 
-// typedef uint32 HAuthTicket;
-// const HAuthTicket k_HAuthTicketInvalid = 0;
+typedef uint32 HAuthTicket;
+const HAuthTicket k_HAuthTicketInvalid = 0;
 
-/*
+
 enum EBeginAuthSessionResult {
 	k_EBeginAuthSessionResultOK = 0,
 	k_EBeginAuthSessionResultInvalidTicket = 1,
@@ -204,7 +204,7 @@ enum EBeginAuthSessionResult {
 	k_EBeginAuthSessionResultGameMismatch = 4,
 	k_EBeginAuthSessionResultExpiredTicket = 5,
 };
-*/
+
 
 /*
 enum EAuthSessionResponse {
@@ -222,13 +222,11 @@ enum EAuthSessionResponse {
 };
 */
 
-/*
 enum EUserHasLicenseForAppResult {
 	k_EUserHasLicenseResultHasLicense = 0,
 	k_EUserHasLicenseResultDoesNotHaveLicense = 1,
 	k_EUserHasLicenseResultNoAuth = 2,
 };
-*/
 
 enum EAccountType {
 	k_EAccountTypeInvalid = 0,
@@ -245,7 +243,7 @@ enum EAccountType {
 	k_EAccountTypeMax
 };
 
-/*
+
 enum EChatEntryType {
 	k_EChatEntryTypeInvalid = 0,
 	k_EChatEntryTypeChatMsg = 1,
@@ -263,7 +261,7 @@ enum EChatEntryType {
 	//k_EChatEntryTypeReserved2 = 13,
 	k_EChatEntryTypeLinkBlocked = 14,
 };
-*/
+
 
 /*
 enum EChatRoomEnterResponse {
@@ -404,6 +402,8 @@ enum EBetaBranchFlags {
 };
 */
 
+#define k_steamIDNil CSteamID()
+
 #pragma pack(push, 1)
 class CSteamID { 
 public:
@@ -477,8 +477,7 @@ public:
 		m_steamid.m_comp.m_unAccountInstance = 0;
 	}
 
-	void CreateBlankAnonUserLogon(EUniverse eUniverse)
-	{
+	void CreateBlankAnonUserLogon(EUniverse eUniverse) {
 		m_steamid.m_comp.m_unAccountID = 0;
 		m_steamid.m_comp.m_EAccountType = k_EAccountTypeAnonUser;
 		m_steamid.m_comp.m_EUniverse = eUniverse;
@@ -524,8 +523,7 @@ private:
 	CSteamID(uint32);
 	CSteamID(int32);
 
-	union SteamID_t
-	{
+	union SteamID_t {
 		struct SteamIDComponent_t {
 #ifdef PR_BIG_ENDIAN // If you really need it, then write '#define PR_BIG_ENDIAN'
 			EUniverse       m_EUniverse : 8;
@@ -568,4 +566,158 @@ inline bool CSteamID::IsValid() const
 	}
 	return true;
 }
+
+class CGameID {
+public:
+
+	enum EGameIDType {
+		k_EGameIDTypeApp		= 0,
+		k_EGameIDTypeGameMod	= 1,
+		k_EGameIDTypeShortcut	= 2,
+	};
+
+	CGameID() {
+		m_gameID.m_nType = k_EGameIDTypeApp;
+		m_gameID.m_nAppID = k_uAppIdInvalid;
+		m_gameID.m_nModID = 0;
+	}
+
+	explicit CGameID(uint64 ulGameID) { m_ulGameID = ulGameID; }
+
+	explicit CGameID(int32 nAppID) {
+		m_ulGameID = 0;
+		m_gameID.m_nAppID = nAppID;
+	}
+
+	explicit CGameID(uint32 nAppID) {
+		m_ulGameID = 0;
+		m_gameID.m_nAppID = nAppID;
+	}
+
+	explicit CGameID(uint32 nAppID, uint32 nModID, CGameID::EGameIDType nType) {
+		m_gameID.m_nAppID = nAppID;
+		m_gameID.m_nModID = nModID;
+		m_gameID.m_nType = nType;
+	}
+
+	explicit CGameID(uint32 nID, CGameID::EGameIDType nType) {
+		m_ulGameID = 0;
+
+		if (nType == k_EGameIDTypeApp) {
+			m_gameID.m_nType = nType;
+			m_gameID.m_nAppID = nID;
+		}
+		else if (nType == k_EGameIDTypeShortcut) {
+			m_gameID.m_nType = nType;
+			m_gameID.m_nModID = nID;
+		}
+	}
+
+	CGameID(const CGameID &that) { m_ulGameID = that.m_ulGameID; }
+
+	CGameID& operator=(const CGameID & that) {
+		m_ulGameID = that.m_ulGameID;
+		return *this;
+	}
+
+	explicit CGameID(const char *pchGameID);
+	const char *Render() const;
+	static const char *Render(uint64 ulGameID);
+
+	uint64 ToUint64() const { return m_ulGameID; }
+	uint64 *GetUint64Ptr() { return &m_ulGameID; }
+	void Set(uint64 ulGameID) { m_ulGameID = ulGameID; }
+	bool IsMod() const { return (m_gameID.m_nType == k_EGameIDTypeGameMod); }
+	bool IsShortcut() const { return (m_gameID.m_nType == k_EGameIDTypeShortcut); }
+	bool IsSteamApp() const { return (m_gameID.m_nType == k_EGameIDTypeApp); }
+	uint32 ModID() const { return (m_gameID.m_nType == k_EGameIDTypeShortcut) ? 0: m_gameID.m_nModID; }
+	uint32 AppID() const { return (m_gameID.m_nType == k_EGameIDTypeShortcut) ? m_gameID.m_nModID : m_gameID.m_nAppID; }
+	bool operator == (const CGameID &rhs) const { return m_ulGameID == rhs.m_ulGameID; }
+	bool operator != (const CGameID &rhs) const { return !(*this == rhs); }
+	bool operator < (const CGameID &rhs) const { return (m_ulGameID < rhs.m_ulGameID); }
+	bool IsValid() const {
+		switch(m_gameID.m_nType) {
+			case k_EGameIDTypeApp:
+				return m_gameID.m_nAppID != k_uAppIdInvalid;
+
+			case k_EGameIDTypeGameMod:
+				return m_gameID.m_nAppID != k_uAppIdInvalid && (m_gameID.m_nModID & 0x80000000);
+
+			case k_EGameIDTypeShortcut:
+				return m_gameID.m_nAppID == k_uAppIdInvalid
+					&& (m_gameID.m_nModID & 0x80000000)
+					&& m_gameID.m_nModID >= (5000 | 0x80000000);
+
+			default:
+				return false;
+		}
+	}
+	void Reset() { m_ulGameID = 0; }
+
+	struct GameID_t {
+#ifdef PR_BIG_ENDIAN // If you really need it, then write '#define PR_BIG_ENDIAN'
+		unsigned int m_nModID : 32;
+		unsigned int m_nType : 8;
+		unsigned int m_nAppID : 24;
+#else
+		unsigned int m_nAppID : 24;
+		unsigned int m_nType : 8;
+		unsigned int m_nModID : 32;
+#endif
+	};
+
+	union {
+		uint64 m_ulGameID;
+		GameID_t m_gameID;
+	};
+
+	friend CGameID GameIDFromAppAndModPath(uint32 nAppID, const char *pchModPath);
+};
+
 #pragma pack(pop)
+
+const int k_cchGameExtraInfoMax = 64;
+
+typedef void (*PFNPreMinidumpCallback)(void *context);
+
+
+enum ESteamIPv6ConnectivityProtocol {
+	k_ESteamIPv6ConnectivityProtocol_Invalid = 0,
+	k_ESteamIPv6ConnectivityProtocol_HTTP = 1,
+	k_ESteamIPv6ConnectivityProtocol_UDP = 2,
+};
+
+enum ESteamIPv6ConnectivityState {
+	k_ESteamIPv6ConnectivityState_Unknown = 0,
+	k_ESteamIPv6ConnectivityState_Good = 1,
+	k_ESteamIPv6ConnectivityState_Bad = 2,
+};
+
+#if defined(_WIN32)
+	#define PR_CALLBACK_PACK_LARGE
+#elif defined(__linux__) || defined(__APPLE__) || defined (__FreeBSD__)
+	#define PR_CALLBACK_PACK_SMALL
+#else
+	#define PR_CALLBACK_PACK_LARGE
+#endif
+
+#if defined(PR_CALLBACK_PACK_SMALL)
+	#pragma pack(push, 4)
+#elif defined(PR_CALLBACK_PACK_LARGE)
+	#pragma pack(push, 8)
+#endif
+
+struct PRPackingSentinel_t {
+	uint32 m_u32;
+	uint64 m_u64;
+	uint16 m_u16;
+	double m_d;
+};
+
+#pragma pack(pop)
+
+#if defined(PR_CALLBACK_PACK_SMALL)
+	static_assert(sizeof(PRPackingSentinel_t) == 24, "Callback packing error: expected 24 bytes.");
+#elif defined(PR_CALLBACK_PACK_LARGE)
+	static_assert(sizeof(PRPackingSentinel_t) == 32, "Callback packing error: expected 32 bytes.");
+#endif

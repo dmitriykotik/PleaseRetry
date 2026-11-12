@@ -17,8 +17,4 @@
 
 #include "steamtypes.h"
 
-class ISteamAppList {
-protected:
-    ISteamAppList() {};
-    ~ISteamAppList() {};
-};
+class ISteamAppList;

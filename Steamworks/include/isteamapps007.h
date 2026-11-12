@@ -17,13 +17,18 @@
 
 #include "isteamapps.h"
 
-class ISteamApps007 : public ISteamApps {
+class ISteamApps007 {
 public:
     virtual bool BIsSubscribed() = 0;
+
 	virtual bool BIsLowViolence() = 0;
+
 	virtual bool BIsCybercafe() = 0;
+
 	virtual bool BIsVACBanned() = 0;
+
 	virtual const char *GetCurrentGameLanguage() = 0;
+
 	virtual const char *GetAvailableGameLanguages() = 0;
 
 	virtual bool BIsSubscribedApp(AppId_t appID) = 0;
@@ -39,15 +44,19 @@ public:
 	virtual bool BGetDLCDataByIndex(int iDLC, AppId_t *pAppID, bool *pbAvailable, char *pchName, int cchNameBufferSize) = 0;
 
 	virtual void InstallDLC(AppId_t nAppID) = 0;
+
 	virtual void UninstallDLC(AppId_t nAppID) = 0;
 	
 	virtual void RequestAppProofOfPurchaseKey(AppId_t nAppID) = 0;
 
 	virtual bool GetCurrentBetaName(char *pchName, int cchNameBufferSize) = 0;
+
 	virtual bool MarkContentCorrupt(bool bMissingFilesOnly) = 0;
+
 	virtual uint32 GetInstalledDepots(AppId_t appID, DepotId_t *pvecDepots, uint32 cMaxDepots) = 0;
 
 	virtual uint32 GetAppInstallDir(AppId_t appID, char *pchFolder, uint32 cchFolderBufferSize) = 0;
+	
 	virtual bool BIsAppInstalled(AppId_t appID) = 0;
 	
 	virtual CSteamID GetAppOwner() = 0;

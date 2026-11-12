@@ -15,20 +15,10 @@
 
 #pragma once
 
-#include "isteamcontroller.h"
+#include "steamtypes.h"
+#include "steamhttpenums.h"
 
-class ISteamController000 : public ISteamController {
-public:
-    virtual bool Init(const char *pchAbsolutePathToControllerConfigVDF) = 0;
-	virtual bool Shutdown() = 0;
+typedef uint32 HTTPRequestHandle;
+typedef uint32 HTTPCookieContainerHandle;
 
-	virtual void RunFrame() = 0;
-
-	virtual bool GetControllerState(uint32 unControllerIndex, SteamControllerState_t *pState) = 0;
-
-	virtual void TriggerHapticPulse(uint32 unControllerIndex, ESteamControllerPad eTargetPad, unsigned short usDurationMicroSec) = 0;
-
-	virtual void SetOverrideMode(const char *pchMode) = 0;
-};
-
-#define STEAMCONTROLLER_INTERFACE_VERSION "STEAMCONTROLLER_INTERFACE_VERSION"
+class ISteamHTTP;

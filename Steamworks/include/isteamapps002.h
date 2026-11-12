@@ -17,13 +17,18 @@
 
 #include "isteamapps.h"
 
-class ISteamApps002 : public ISteamApps {
+class ISteamApps002 {
 public:
     virtual bool BIsSubscribed() = 0;
+
 	virtual bool BIsLowViolence() = 0;
+
 	virtual bool BIsCybercafe() = 0;
+
 	virtual bool BIsVACBanned() = 0;
+
 	virtual const char *GetCurrentGameLanguage() = 0;
+	
 	virtual const char *GetAvailableGameLanguages() = 0;
 
 	virtual bool BIsSubscribedApp(AppId_t appID) = 0;

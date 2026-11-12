@@ -18,8 +18,14 @@
 #include "steamtypes.h"
 #include "steamclientpublic.h"
 
-class ISteamApps {
-protected:
-    ISteamApps() {};
-    ~ISteamApps() {};
+enum EGamePerformanceSetting
+{
+	k_EGamePerformanceSetting_NotSet	= 0,
+	k_EGamePerformanceSetting_Low		= 1,
+	k_EGamePerformanceSetting_Medium	= 2,
+	k_EGamePerformanceSetting_High		= 3,
+	k_EGamePerformanceSetting_Ultra		= 4,
+	k_EGamePerformanceSetting_Custom	= 5,
 };
+
+class ISteamApps;

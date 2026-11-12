@@ -17,7 +17,7 @@
 
 #include "isteamcontroller.h"
 
-class ISteamController003 : public ISteamController {
+class ISteamController003 {
 public:
     virtual bool Init() = 0;
 	virtual bool Shutdown() = 0;
@@ -31,6 +31,7 @@ public:
 	virtual ControllerActionSetHandle_t GetActionSetHandle(const char *pszActionSetName) = 0;
 	
 	virtual void ActivateActionSet(ControllerHandle_t controllerHandle, ControllerActionSetHandle_t actionSetHandle) = 0;
+	
 	virtual ControllerActionSetHandle_t GetCurrentActionSet(ControllerHandle_t controllerHandle) = 0;
 	
 	virtual ControllerDigitalActionHandle_t GetDigitalActionHandle(const char *pszActionName) = 0;

@@ -17,8 +17,4 @@
 
 #include "steamtypes.h"
 
-class ISteamAppTicket {
-protected:
-    ISteamAppTicket() {};
-    ~ISteamAppTicket() {};
-};
+class ISteamAppTicket;

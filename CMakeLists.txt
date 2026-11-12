@@ -13,7 +13,7 @@
 # // or third-party restrictions. All actions are performed at your own risk.
 # //=============================================================================//
 
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.16)
 
 project(PleaseRetry VERSION 1.0)
 

@@ -17,7 +17,7 @@
 
 #include "isteamapps.h"
 
-class ISteamApps001 : public ISteamApps {
+class ISteamApps001 {
 public:
     virtual int GetAppData(AppId_t nAppID, const char *pchKey, char *pchValue, int cchValueMax) = 0;
 };

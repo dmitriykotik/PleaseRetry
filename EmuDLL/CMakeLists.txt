@@ -20,6 +20,8 @@ set(libraryName64 "steam_api64")
 
 add_library(${EMUDLL_NAME} SHARED main.cpp)
 
+target_compile_definitions(${EMUDLL_NAME} PRIVATE PR_API_EXPORTS)
+
 if(CMAKE_SIZEOF_VOID_P EQUAL 8)
     set_target_properties(${EMUDLL_NAME} PROPERTIES OUTPUT_NAME ${libraryName64})
 else()
