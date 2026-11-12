@@ -20,17 +20,29 @@
 <details>
 <summary><b><code>SDKs used</code></b></summary>
 
-| Version | F. SDK | L. SDK | U. SDK |
-| :-----: | :----: | :----: | :----: |
-|   001   |   00   |   00   |   00   |
-|   002   |   01   |   03   |   03   |
-|   003   |   04   |   11   |   11   |
-|   004   |   12   |   17   |   17   |
-|   005   |   18   |   25   |   25   |
-|   006   |   26   |   31   |   31   |
-|   007   |   32   |   36   |   36   |
-|   008   |   37   |   63   |   63   |
-|   009   |   64   |   *    |  *64   |
+| Version | U. SDK |
+| :-----: | :----: |
+|   001   |  100   |
+|   002   |  103   |
+|   003   |  111   |
+|   004   |  117   |
+|   005   |  125   |
+|   006   |  131   |
+|   007   |  136   |
+|   008   |  163   |
+|   009   |  165   |
+
+```
+001 - 100, G
+002 - 101, 102, 103, G
+003 - 104, 105, 106, 107, 108, 109, 110, 111, G
+004 - 112, 113, 114, 115, 116, 117, G
+005 - 118, 119, 120, 121, 122, 123a, 125, G
+006 - 126a, 127, 128, 129a, 130, 131, G
+007 - 132, 133b, 134, 135, 135a, 136, G
+008 - 137, 138a, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148a, 149, 150, 151, 152, 153a, 154, 155, 156, 157, 158a, 159, 160, 161, 162, 163, G
+009 - 164, 165
+```
 </details>
 <!-- #endregion -->
 
@@ -104,6 +116,7 @@
 |  12   | `bool BGetDLCDataByIndex(int iDLC, AppId_t *pAppID, bool *pbAvailable, char *pchName, int cchNameBufferSize)` |
 |  13   | `void InstallDLC(AppId_t nAppID)`                                                                             |
 |  14   | `void UninstallDLC(AppId_t nAppID)`                                                                           |
+|  15   | `SteamAPICall_t RegisterActivationCode( const char *pchActivationCode )`                                      |
 
 </details>
 <!-- #endregion -->
@@ -134,6 +147,7 @@
 |  18   | `uint32 GetInstalledDepots(DepotId_t *pvecDepots, uint32 cMaxDepots)`                                         |
 |  19   | `uint32 GetAppInstallDir(AppId_t appID, char *pchFolder, uint32 cchFolderBufferSize)`                         |
 |  20   | `bool BIsAppInstalled(AppId_t appID)`                                                                         |
+|  21   | `SteamAPICall_t RegisterActivationCode( const char *pchActivationCode )`                                      |
 
 </details>
 <!-- #endregion -->
@@ -166,6 +180,7 @@
 |  20   | `bool BIsAppInstalled(AppId_t appID)`                                                                         |
 |  21   | `CSteamID GetAppOwner()`                                                                                      |
 |  22   | `const char *GetLaunchQueryParam(const char *pchKey)`                                                         |
+|  23   | `SteamAPICall_t RegisterActivationCode( const char *pchActivationCode )`                                      |
 
 </details>
 <!-- #endregion -->
@@ -286,6 +301,8 @@
 |  31   | `int GetNumBetas(int *pnAvailable, int *pnPrivate)`                                                                                                                            |
 |  32   | `bool GetBetaInfo(int iBetaIndex, uint32 *punFlags, uint32 *punBuildID, char *pchBetaName, int cchBetaName, char *pchDescription, int cchDescription, uint32 *punLastUpdated)` |
 |  33   | `bool SetActiveBeta(const char *pchBetaName)`                                                                                                                                  |
+|  34   | `void SetGamePerformanceSetting(EGamePerformanceSetting setting)`                                                                                                              |
+|  35   | `void SetGameRenderResolution(uint32 unWidth, uint32 unHeight)`                                                                                                                |
 
 </details>
 <!-- #endregion -->
@@ -332,6 +349,9 @@
 |  34   | `bool GetBetaInfo(int iBetaIndex, uint32 *punFlags, uint32 *punBuildID, char *pchBetaName, int cchBetaName, char *pchDescription, int cchDescription)`                         | `008`                                                  |
 |  35   | `bool SetActiveBeta(const char *pchBetaName)`                                                                                                                                  | `008`, `009`                                           |
 |  36   | `bool GetBetaInfo(int iBetaIndex, uint32 *punFlags, uint32 *punBuildID, char *pchBetaName, int cchBetaName, char *pchDescription, int cchDescription, uint32 *punLastUpdated)` | `009`                                                  |
+|  34   | `SteamAPICall_t RegisterActivationCode(const char *pchActivationCode)`                                                                                                         | `004`, `005`, `006`                                    |
+|  34   | `void SetGamePerformanceSetting(EGamePerformanceSetting setting)`                                                                                                              | `009`                                                  |
+|  35   | `void SetGameRenderResolution(uint32 unWidth, uint32 unHeight)`                                                                                                                | `009`                                                  |
 
 </details>
 <!-- #endregion -->
@@ -855,5 +875,65 @@ bool SetActiveBeta(const char *pchBetaName)
 Позволяет сделать бета-ветку приложения активной. Чтобы изменения вступили в силу, может потребоваться перезапуск Steam.
 
 **Возвращает:** `bool`
+
+## bool SetActiveBeta(const char *pchBetaName)
+```cpp
+int GetAppData(AppId_t nAppID, const char *pchKey, char *pchValue, int cchValueMax)
+```
+
+| Название      | Тип            | Описание                                                                  |
+| :------------ | :------------- | :------------------------------------------------------------------------ |
+| `nAppID`      | `AppId_t`      | `AppId`, для которого запрашивается информация.                           |
+| `pchKey`      | `const char *` | Текстовый ключ, значение которого необходимо получить.                    |
+| `pchValue`    | `char *`       | Строковый буфер, в который будет скопировано текстовое значение свойства. |
+| `cchValueMax` | `int`          | Размер буфера `pchValue` в байтах.                                        |
+
+Получает кастомные метаданные, связанные с указанным приложением, по строковому ключу.
+
+**Возвращает:** `int`\
+Количество байт, фактически записанных в буфер `pchValue`.
+
+## RegisterActivationCode
+```cpp
+SteamAPICall_t RegisterActivationCode(const char *pchActivationCode)
+```
+
+| Название            | Тип            | Описание |
+| :------------------ | :------------- | :------- |
+| `pchActivationCode` | `const char *` | -        |
+
+-
+
+**Возвращает:** `SteamAPICall_t`\
+-
+
+## SetGamePerformanceSetting
+```cpp
+void SetGamePerformanceSetting(EGamePerformanceSetting setting)
+```
+
+| Название  | Тип                       | Описание |
+| :-------- | :------------------------ | :------- |
+| `setting` | `EGamePerformanceSetting` | -        |
+
+-
+
+**Возвращает:** `void`\
+-
+
+## SetGameRenderResolution
+```cpp
+void SetGameRenderResolution(uint32 unWidth, uint32 unHeight)
+```
+
+| Название   | Тип      | Описание |
+| :--------- | :------- | :------- |
+| `unWidth`  | `uint32` | -        |
+| `unHeight` | `uint32` | -        |
+
+-
+
+**Возвращает:** `void`\
+-
 
 <!-- #endregion -->

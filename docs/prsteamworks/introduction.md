@@ -18,47 +18,62 @@
 В данной документации вы найдёте всю необходимую информацию по интерфейсам.
 
 ## Таблица
-| File                        | Class                     | Interface                                    | Found versions | Real versions | Status  |
-| :-------------------------- | :------------------------ | :------------------------------------------- | :------------: | :-----------: | :-----: |
-| isteamapplist.h             | ISteamAppList             | STEAMAPPLIST_INTERFACE_VERSION`XXX`          |    001-001     |    001-001    | &check; |
-| isteamapps.h                | ISteamApps                | STEAMAPPS\_INTERFACE\_VERSION`XXX`           |    001-009     |    001-009    | &check; |
-| isteamappticket.h           | ISteamAppTicket           | STEAMAPPTICKET_INTERFACE_VERSION`XXX`        |    001-001     |    001-001    | &check; |
-| isteamclient.h              | ISteamClient              | SteamClient`XXX`                             |    007-023     |    006-023    | &cross; |
-| isteamcontroller.h          | ISteamController          | ~                                            |       ~        |       ~       | &check; |
-| isteamfriends.h             | ISteamFriends             | SteamFriends`XXX`                            |    003-018     |    001-018    | &cross; |
-| isteamgamecoordinator.h     | ISteamGameCoordinator     | SteamGameCoordinator`XXX`                    |    001-001     |    001-001    | &cross; |
-| isteamgameserver.h          | ISteamGameServer          | SteamGameServer`XXX`                         |    004-015     |    002-015    | &cross; |
-| isteamgameserverstats.h     | ISteamGameServerStats     | SteamGameServerStats`XXX`                    |    001-001     |    001-001    | &cross; |
-| isteamgamestats.h           | ISteamGameStats           | SteamGameStats`XXX`                          |    001-001     |    001-001    | &cross; |
-| isteamhtmlsurface.h         | ISteamHTMLSurface         | STEAMHTMLSURFACE_INTERFACE_VERSION_`XXX`     |    002-005     |    001-005    | &cross; |
-| isteamhttp.h                | ISteamHTTP                | STEAMHTTP_INTERFACE_VERSION`XXX`             |    001-003     |    001-003    | &cross; |
-| isteaminput.h               | ISteamInput               | SteamInput`XXX`                              |    001-006     |    001-006    | &cross; |
-| isteaminventory.h           | ISteamInventory           | STEAMINVENTORY_INTERFACE_V`XXX`              |    001-003     |    001-003    | &cross; |
-| isteammasterserverupdater.h | ISteamMasterServerUpdater | SteamMasterServerUpdater`XXX`                |    001-001     |    001-001    | &cross; |
-| isteammatchmaking.h         | ISteamMatchmaking         | SteamMatchMaking`XXX`                        |    002-009     |    001-009    | &cross; |
-| isteammatchmaking.h         | ISteamMatchmakingServers  | SteamMatchMakingServers`XXX`                 |    001-002     |    001-002    | &cross; |
-| isteammatchmaking.h         | ISteamGameSearch          | SteamMatchGameSearch`XXX`                    |    001-001     |    001-002    | &cross; |
-| isteammatchmaking.h         | ISteamParties             | SteamParties`XXX`                            |    002-002     |    002-002    | &cross; |
-| isteammusic.h               | ISteamMusic               | STEAMMUSIC_INTERFACE_VERSION`XXX`            |    001-001     |    001-001    | &cross; |
-| isteammusicremote.h         | ISteamMusicRemote         | STEAMMUSICREMOTE_INTERFACE_VERSION`XXX`      |    001-001     |    001-001    | &cross; |
-| isteamnetworking.h          | ISteamNetworking          | SteamNetworking`XXX`                         |    001-006     |    001-006    | &cross; |
-| isteamnetworkingmessages.h  | ISteamNetworkingMessages  | SteamNetworkingMessages`XXX`                 |    002-002     |    002-002    | &cross; |
-| isteamnetworkingsockets.h   | ISteamNetworkingSockets   | SteamNetworkingSockets`XXX`                  |    002-012     |    002-012    | &cross; |
-| isteamnetworkingutils.h     | ISteamNetworkingUtils     | SteamNetworkingUtils`XXX`                    |    001-004     |    001-004    | &cross; |
-| isteamparentalsettings.h    | ISteamParentalSettings    | STEAMPARENTALSETTINGS_INTERFACE_VERSION`XXX` |    001-001     |    001-001    | &cross; |
-| isteamremoteplay.h          | ISteamRemotePlay          | STEAMREMOTEPLAY_INTERFACE_VERSION`XXX`       |    001-004     |    001-004    | &cross; |
-| isteamremotestorage.h       | ISteamRemoteStorage       | STEAMREMOTESTORAGE_INTERFACE_VERSION`XXX`    |    002-016     |    001-016    | &cross; |
-| isteamscreenshots.h         | ISteamScreenshots         | STEAMSCREENSHOTS_INTERFACE_VERSION`XXX`      |    001-003     |    001-004    | &cross; |
-| isteamtimeline.h            | ISteamTimeline            | STEAMTIMELINE_INTERFACE_V`XXX`               |    001-004     |    001-004    | &cross; |
-| isteamugc.h                 | ISteamUGC                 | STEAMUGC_INTERFACE_VERSION`XXX`              |    001-021     |    001-021    | &cross; |
-| isteamunifiedmessages.h     | ISteamUnifiedMessages     | STEAMUNIFIEDMESSAGES_INTERFACE_VERSION`XXX`  |    001-001     |    001-001    | &cross; |
-| isteamuser.h                | ISteamUser                | SteamUser`XXX`                               |    009-023     |    004-023    | &cross; |
-| isteamuserstats.h           | ISteamUserStats           | STEAMUSERSTATS\_INTERFACE\_VERSION`XXX`      |    003-013     |    001-013    | &cross; |
-| isteamutils.h               | ISteamUtils               | SteamUtils`XXX`                              |    002-010     |    001-010    | &cross; |
-| isteamvideo.h               | ISteamVideo               | STEAMVIDEO_INTERFACE_V`XXX`                  |    001-007     |    001-007    | &cross; |
+| File                        | Class                                      | Interface                                    | Found versions | Type  | Status  |
+| :-------------------------- | :----------------------------------------- | :------------------------------------------- | :------------: | :---: | :-----: |
+| isteamapplist.h             | ISteamAppList                              | STEAMAPPLIST_INTERFACE_VERSION`XXX`          |    001-001     |  `V`  | &check; |
+| isteamappticket.h           | ISteamAppTicket                            | STEAMAPPTICKET_INTERFACE_VERSION`XXX`        |    001-001     |  `V`  | &check; |
+| isteamapps.h                | ISteamApps                                 | STEAMAPPS_INTERFACE_VERSION`XXX`             |    001-009     |  `V`  | &check; |
+| isteamclient.h              | ISteamClient                               | SteamClient`XXX`                             |    007-023     |  `V`  | &cross; |
+| isteamcontentserver.h       | ISteamContentServer                        | SteamContentServer`XXX`                      |    001-002     |  `V`  | &check; |
+| isteamcontroller.h          | ISteamController                           | ~                                            |       ~        |  `V`  | &check; |
+| isteamfriends.h             | ISteamFriends                              | SteamFriends`XXX`                            |    003-018     |  `V`  | &check; |
+| isteamgamecoordinator.h     | ISteamGameCoordinator                      | SteamGameCoordinator`XXX`                    |    001-001     |  `V`  | &check; |
+| isteamgameserver.h          | ISteamGameServer                           | SteamGameServer`XXX`                         |    002-015     |  `V`  | &check; |
+| isteamgameserverstats.h     | ISteamGameServerStats                      | SteamGameServerStats`XXX`                    |    001-001     |  `V`  | &check; |
+| isteamgamestats.h           | ISteamGameStats                            | SteamGameStats`XXX`                          |    001-001     |  `V`  | &check; |
+| isteamhtmlsurface.h         | ISteamHTMLSurface                          | STEAMHTMLSURFACE_INTERFACE_VERSION_`XXX`     |    001-005     |  `V`  | &check; |
+| isteamhttp.h                | ISteamHTTP                                 | STEAMHTTP_INTERFACE_VERSION`XXX`             |    001-003     |  `V`  | &cross; |
+| isteaminput.h               | ISteamInput                                | SteamInput`XXX`                              |    001-007     |  `V`  | &cross; |
+| isteaminventory.h           | ISteamInventory                            | STEAMINVENTORY_INTERFACE_V`XXX`              |    001-003     |  `V`  | &cross; |
+| isteammasterserverupdater.h | ISteamMasterServerUpdater                  | SteamMasterServerUpdater`XXX`                |    001-001     |  `V`  | &cross; |
+| isteammatchmaking.h         | ISteamMatchmaking                          | SteamMatchMaking`XXX`                        |    002-009     |  `V`  | &cross; |
+| isteammatchmaking.h         | ISteamMatchmakingPingResponse              | -                                            |       -        |  `G`  |    -    |
+| isteammatchmaking.h         | ISteamMatchmakingPlayersResponse           | -                                            |       -        |  `G`  |    -    |
+| isteammatchmaking.h         | ISteamMatchmakingRulesResponse             | -                                            |       -        |  `G`  |    -    |
+| isteammatchmaking.h         | ISteamMatchmakingServerFriendsResponse     | -                                            |       -        |  `G`  |    -    |
+| isteammatchmaking.h         | ISteamMatchmakingServerListResponse        | -                                            |       -        |  `G`  |    -    |
+| isteammatchmaking.h         | ISteamMatchmakingServers                   | SteamMatchMakingServers`XXX`                 |    001-003     |  `V`  | &cross; |
+| isteammatchmaking.h         | ISteamGameSearch                           | SteamMatchGameSearch`XXX`                    |    001-001     |  `V`  | &cross; |
+| isteammatchmaking.h         | ISteamParties                              | SteamParties`XXX`                            |    002-002     |  `V`  | &cross; |
+| isteammusic.h               | ISteamMusic                                | STEAMMUSIC_INTERFACE_VERSION`XXX`            |    001-001     |  `V`  | &cross; |
+| isteammusicremote.h         | ISteamMusicRemote                          | STEAMMUSICREMOTE_INTERFACE_VERSION`XXX`      |    001-001     |  `V`  | &cross; |
+| isteamnetworking.h          | ISteamNetworking                           | SteamNetworking`XXX`                         |    001-006     |  `V`  | &cross; |
+| isteamnetworkingfakeip.h    | ISteamNetworkingFakeUDPPort                | -                                            |       -        |  `G`  |    -    |
+| isteamnetworkingmessages.h  | ISteamNetworkingMessages                   | SteamNetworkingMessages`XXX`                 |    002-002     |  `V`  | &cross; |
+| isteamnetworkingsockets.h   | ISteamNetworkingSockets                    | SteamNetworkingSockets`XXX`                  |    001-013     |  `V`  | &cross; |
+| isteamnetworkingsockets.h   | ISteamNetworkingConnectionCustomSignaling  | -                                            |       -        |  `G`  |    -    |
+| isteamnetworkingsockets.h   | ISteamNetworkingConnectionSignaling        | -                                            |       -        |  `G`  |    -    |
+| isteamnetworkingsockets.h   | ISteamNetworkingCustomSignalingRecvContext | -                                            |       -        |  `G`  |    -    |
+| isteamnetworkingsockets.h   | ISteamNetworkingSignalingRecvContext       | -                                            |       -        |  `G`  |    -    |
+| isteamnetworkingsockets.h   | ISteamNetworkingSocketsCallbacks           | -                                            |       -        |  `G`  |    -    |
+| isteamnetworkingutils.h     | ISteamNetworkingUtils                      | SteamNetworkingUtils`XXX`                    |    001-004     |  `V`  | &cross; |
+| isteamps3overlayrender.h    | ISteamPS3OverlayRender                     | -                                            |       -        |  `V`  | &cross; |
+| isteamps3overlayrender.h    | ISteamPS3OverlayRenderHost                 | -                                            |       -        |  `G`  | &cross; |
+| isteamparentalsettings.h    | ISteamParentalSettings                     | STEAMPARENTALSETTINGS_INTERFACE_VERSION`XXX` |    001-001     |  `V`  | &cross; |
+| isteamremoteplay.h          | ISteamRemotePlay                           | STEAMREMOTEPLAY_INTERFACE_VERSION`XXX`       |    001-004     |  `V`  | &cross; |
+| isteamremotestorage.h       | ISteamRemoteStorage                        | STEAMREMOTESTORAGE_INTERFACE_VERSION`XXX`    |    001-016     |  `V`  | &cross; |
+| isteamscreenshots.h         | ISteamScreenshots                          | STEAMSCREENSHOTS_INTERFACE_VERSION`XXX`      |    001-003     |  `V`  | &cross; |
+| isteamtv.h                  | ISteamTV                                   | STEAMTV_INTERFACE_V`XXX`                     |    001-001     |  `V`  | &cross; |
+| isteamtimeline.h            | ISteamTimeline                             | STEAMTIMELINE_INTERFACE_V`XXX`               |    001-004     |  `V`  | &cross; |
+| isteamugc.h                 | ISteamUGC                                  | STEAMUGC_INTERFACE_VERSION`XXX`              |    001-021     |  `V`  | &cross; |
+| isteamunifiedmessages.h     | ISteamUnifiedMessages                      | STEAMUNIFIEDMESSAGES_INTERFACE_VERSION`XXX`  |    001-001     |  `V`  | &cross; |
+| isteamuser.h                | ISteamUser                                 | SteamUser`XXX`                               |    009-023     |  `V`  | &cross; |
+| isteamuserstats.h           | ISteamUserStats                            | STEAMUSERSTATS_INTERFACE_VERSION`XXX`        |    001-013     |  `V`  | &cross; |
+| isteamutils.h               | ISteamUtils                                | SteamUtils`XXX`                              |    002-011     |  `V`  | &cross; |
+| isteamvideo.h               | ISteamVideo                                | STEAMVIDEO_INTERFACE_V`XXX`                  |    001-007     |  `V`  | &cross; |
 
 > [!WARNING]
-> **Обратите внимание:** знак `~` означает, что вам необходимо прочитать документацию по этому интерфейсу. Всю информацию вы найдёте в этом файле.
+> **Обратите внимание:** знак `~` означает, что вам необходимо прочитать документацию по этому интерфейсу.
 
 `File` - Полное имя файла интерфейса в `Steamworks SDK`.\
 `Class` - Класс, который использует этот интерфейс. Полезно для VTable.\
@@ -66,18 +81,18 @@
 > [!IMPORTANT]
 > Текстовое название интерфейса может отличаться от названия класса интерфейса.
 
-`Found versions` - Версии интерфейсов, которые были найдены и добавлены в проект.\
-`Real versions` - Версии интерфейсов, которые были обнаружены в различных библиотеках `Steam`. Однако значение `Real versions` может отличаться, если какие-то версии интерфейсов по каким-либо причинам недоступны.
+`Versions` - Версии интерфейсов, которые были найдены и добавлены в проект.\
+`Type` - Тип класса. `V` - Имеет одну или несколько версий (явно объявляемые), является интерфейсом, логику реализует эмулятор; `G` - Имеет только одну версию (на все версии SDK), не является интерфейсом, логику реализует игра.\
 `Status` - Статус разработки интерфейса в данном проекте.
 
 ## Что это?
-`PleaseRetrySteamworks` — это SDK, в котором собраны интерфейсы и типы данных `SteamworksSDK`. Я написал его как дополнение для своего основного проекта `PleaseRetryEmu`, потому что существующие варианты меня не совсем устроили.
+`PleaseRetrySteamworks` -- это SDK, в котором собраны интерфейсы и типы данных `SteamworksSDK`. Я написал его как дополнение для своего основного проекта `PleaseRetryEmu`, потому что существующие варианты меня не совсем устроили.
 
 
 ### Зачем?
 - `GoldbergEmu` - отличный проект, но взаимодействовать с его SDK мне показалось неудобно. К тому же SDK в проекте уже давно не обновлялся, а ведь уже появились новые версии интерфейсов.
-- `OpenSteamworks` - точно так же, как и с `GoldbergEmu`. Проекту уже лет 15, и он давно заброшен по понятным причинам.
-- `SteamworksSDK` - изначально заточен под разработчиков игр, а не под другие цели. В нём куча вещей, которые для эмуляции просто не нужны. Тянуть его целиком в проект, на мой взгляд, непрактично - для понимания структуры запросов steam_api вполне достаточно одних интерфейсов.
+- `OpenSteamworks` - точно так же, как и с `GoldbergEmu`. Проекту уже лет 15, и он давно заброшен, ведь разрабатывался когда не было публичного `SteamworksSDK`.
+- `SteamworksSDK` - изначально заточен под разработчиков игр, а не под другие цели. В нём куча вещей, которые для эмуляции просто не нужны. Тянуть его целиком в проект, на мой взгляд, непрактично.
 
 Ну, вы понимаете. Мне показалось, что проще написать с нуля свой SDK, взяв только самое необходимое. Считайте, что мой проект - это не форк `SteamworksSDK`, а полностью новый SDK, созданный специально для целей, где есть зависимость от версий интерфейсов.
 
@@ -92,26 +107,29 @@
 **Общие определения:**\
 `Value` - Некоторое значение в таблице.\
 `Некоторый интерфейс` - Интерфейс, о котором идёт речь в текущей главе.\
-`SDK` - `SteamworksSDK`. В контексте версий данного проекта используется сокращенный формат: версии обозначаются двузначным числом (например, `47`), тогда как в оригинале используется трехзначное число, всегда начинающееся с единицы (например, `147`). (`версия в проекте` → `версия в оригинале`: `47` → `147`, `32` → `132` и т.д.)\
+`SDK` - `SteamworksSDK`. Версии обозначаются числами (например, `122`), числами с буквой (например, `123a`), буквами (например, `G` или `O`).\
 `I. Versions` - Версии `некоторого интерфейса`.
 
 ### Таблицы
 <details>
 <summary><b><code>SDKs used</code></b></summary>
 
-| Version | F. SDK  | L. SDK  | U. SDK  |
-| :-----: | :-----: | :-----: | :-----: |
-| `Value` | `Value` | `Value` | `Value` |
+| Version | U. SDK  |
+| :-----: | :-----: |
+| `Value` | `Value` |
 
-В этой таблице приведены версии `некоторого интерфейса` и версии `SDK`, в которых они были обнаружены. Однако, некоторые интерфейсы могут быть заимствованы из сторонних проектов. В таком случае вместо версии `SDK` указывается буквенный идентификатор проекта (*это означает, что в публичном `SDK` я не нашёл этот интерфейс, но он существует*):
+```
+`Version` - `L. SDK`
+```
+
+В этой таблице приведены версии `некоторого интерфейса` и версии `SDK`, которые были использованы для этих интерфейсов. Однако, некоторые интерфейсы могут быть заимствованы из сторонних проектов. В таком случае вместо версии `SDK` указывается буквенный идентификатор проекта (*это означает, что в публичном `SDK` (`SteamworksSDK`) я не нашёл этот интерфейс, но он существует*):
 - `G` - `GoldbergEmu`.
 - `O` - `OpenSteamworks`.
 - &cross; - Нет информации.
   
 #### Определения
 `Version` - Версия `некоторого интерфейса`.\
-`F. SDK` - Версия `SDK`, в которой впервые появился интерфейс.\
-`L. SDK` - Версия `SDK`, в которой последний раз появился этот интерфейс. (_* - означает, что интерфейс используется в последней версии `SDK` на момент последнего редактирования документации_)\
+`L. SDK` - Список версий `SDK`, в которых была найдена версия `некоторого интерфейса`.
 `U. SDK` - Версия `SDK`, интерфейс которой был использован в этом проекте. 
 </details>
 
