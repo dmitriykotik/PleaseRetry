@@ -22,7 +22,6 @@ enum ESteamControllerPad {
 	k_ESteamControllerPad_Right
 };
 
-/*
 enum EControllerSource {
 	k_EControllerSource_None,
 	k_EControllerSource_LeftTrackpad,
@@ -35,7 +34,6 @@ enum EControllerSource {
 	k_EControllerSource_Gyro,
 	k_EControllerSource_Count
 };
-*/
 
 enum EControllerSourceMode {
 	k_EControllerSourceMode_None,
