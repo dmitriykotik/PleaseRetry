@@ -32,9 +32,9 @@
 | isteamgameserverstats.h     | ISteamGameServerStats                      | SteamGameServerStats`XXX`                    |    001-001     |  `V`  | &check; |
 | isteamgamestats.h           | ISteamGameStats                            | SteamGameStats`XXX`                          |    001-001     |  `V`  | &check; |
 | isteamhtmlsurface.h         | ISteamHTMLSurface                          | STEAMHTMLSURFACE_INTERFACE_VERSION_`XXX`     |    001-005     |  `V`  | &check; |
-| isteamhttp.h                | ISteamHTTP                                 | STEAMHTTP_INTERFACE_VERSION`XXX`             |    001-003     |  `V`  | &cross; |
-| isteaminput.h               | ISteamInput                                | SteamInput`XXX`                              |    001-007     |  `V`  | &cross; |
-| isteaminventory.h           | ISteamInventory                            | STEAMINVENTORY_INTERFACE_V`XXX`              |    001-003     |  `V`  | &cross; |
+| isteamhttp.h                | ISteamHTTP                                 | STEAMHTTP_INTERFACE_VERSION`XXX`             |    001-003     |  `V`  | &check; |
+| isteaminput.h               | ISteamInput                                | SteamInput`XXX`                              |    001-007     |  `V`  | &check; |
+| isteaminventory.h           | ISteamInventory                            | STEAMINVENTORY_INTERFACE_V`XXX`              |    001-003     |  `V`  | &check; |
 | isteammasterserverupdater.h | ISteamMasterServerUpdater                  | SteamMasterServerUpdater`XXX`                |    001-001     |  `V`  | &cross; |
 | isteammatchmaking.h         | ISteamMatchmaking                          | SteamMatchMaking`XXX`                        |    002-009     |  `V`  | &cross; |
 | isteammatchmaking.h         | ISteamMatchmakingPingResponse              | -                                            |       -        |  `G`  |    -    |
