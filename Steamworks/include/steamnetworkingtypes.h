@@ -128,7 +128,7 @@ struct SteamNetworkingIPAddr {
 
 	bool operator==(const SteamNetworkingIPAddr &x) const { return memcmp(this, &x, sizeof(SteamNetworkingIPAddr)) == 0; }
 
-	ESteamNetworkingFakeIPType GetFakeIPType() const;
+	ESteamNetworkingFakeIPType GetFakeIPType() const { return IsIPv4() ? k_ESteamNetworkingFakeIPType_NotFake : k_ESteamNetworkingFakeIPType_Invalid; }
 
 	bool IsFakeIP() const { return GetFakeIPType() > k_ESteamNetworkingFakeIPType_NotFake; }
 };
@@ -274,6 +274,23 @@ struct SteamNetConnectionInfo_t {
 	char m_szConnectionDescription[k_cchSteamNetworkingMaxConnectionDescription];
 	int m_nFlags;
 	uint32 reserved[63];
+};
+
+struct SteamNetworkingQuickConnectionStatus {
+	ESteamNetworkingConnectionState m_eState;
+	int m_nPing;
+	float m_flConnectionQualityLocal;
+	float m_flConnectionQualityRemote;
+	float m_flOutPacketsPerSec;
+	float m_flOutBytesPerSec;
+	float m_flInPacketsPerSec;
+	float m_flInBytesPerSec;
+	int m_nSendRateBytesPerSecond;
+	int m_cbPendingUnreliable;
+	int m_cbPendingReliable;
+	int m_cbSentUnackedReliable;
+	SteamNetworkingMicroseconds m_usecQueueTime;
+	uint32 reserved[16];
 };
 
 struct SteamNetConnectionRealTimeStatus_t {
@@ -505,7 +522,7 @@ struct SteamNetworkingConfigValue_t {
 	}
 	inline void SetString(ESteamNetworkingConfigValue eVal, const char *data) {
 		m_eValue = eVal;
-		m_eDataType = k_ESteamNetworkingConfig_Ptr;
+		m_eDataType = k_ESteamNetworkingConfig_String;
 		m_val.m_string = data;
 	}
 };
@@ -568,3 +585,20 @@ private:
 
 typedef SteamNetworkingMessage_t ISteamNetworkingMessage;
 typedef SteamNetworkingErrMsg SteamDatagramErrMsg;
+
+class ISteamNetworkingConnectionCustomSignaling {
+public:
+	virtual bool SendSignal(HSteamNetConnection hConn, const SteamNetConnectionInfo_t &info, const void *pMsg, int cbMsg) = 0;
+
+	virtual void Release() = 0;
+};
+
+class ISteamNetworkingCustomSignalingRecvContext {
+public:
+	virtual ISteamNetworkingConnectionCustomSignaling *OnConnectRequest(HSteamNetConnection hConn, const SteamNetworkingIdentity &identityPeer) = 0;
+
+	virtual void SendRejectionSignal(const SteamNetworkingIdentity &identityPeer, const void *pMsg, int cbMsg) = 0;
+};
+
+typedef ISteamNetworkingConnectionCustomSignaling ISteamNetworkingConnectionSignaling;
+typedef ISteamNetworkingCustomSignalingRecvContext ISteamNetworkingSignalingRecvContext;

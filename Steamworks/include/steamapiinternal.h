@@ -75,6 +75,7 @@ enum { k_iSteamControllerCallbacks = 2800 };
 enum { k_iSteamUGCCallbacks = 3400 };
 enum { k_iSteamStreamClientCallbacks = 3500 };
 enum { k_iSteamMusicCallbacks = 4000 };
+enum { k_iSteamMusicRemoteCallbacks = 4100 };
 enum { k_iSteamGameNotificationCallbacks = 4400 }; 
 enum { k_iSteamHTMLSurfaceCallbacks = 4500 };
 enum { k_iSteamVideoCallbacks = 4600 };
