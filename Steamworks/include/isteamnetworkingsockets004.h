@@ -74,6 +74,8 @@ public:
 	virtual int FindRelayAuthTicketForServer(const SteamNetworkingIdentity &identityGameServer, int nVirtualPort, SteamDatagramRelayAuthTicket *pOutParsedTicket) = 0;
 
 	virtual HSteamNetConnection ConnectToHostedDedicatedServer(const SteamNetworkingIdentity &identityTarget, int nVirtualPort) = 0;
+	
+	virtual uint16 GetHostedDedicatedServerPort() = 0;
 
 	virtual SteamNetworkingPOPID GetHostedDedicatedServerPOPID() = 0;
 

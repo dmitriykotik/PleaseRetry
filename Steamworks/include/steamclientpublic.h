@@ -154,8 +154,6 @@ enum EResult {
 	k_EResultTryLater = 131,
 };
 
-
-/*
 enum EVoiceResult {
 	k_EVoiceResultOK = 0,
 	k_EVoiceResultNotInitialized = 1,
@@ -169,9 +167,7 @@ enum EVoiceResult {
 	k_EVoiceResultReceiverDidNotAnswer = 9,
 
 };
-*/
 
-/*
 enum EDenyReason {
 	k_EDenyInvalid = 0,
 	k_EDenyInvalidVersion = 1,
@@ -190,7 +186,6 @@ enum EDenyReason {
 	k_EDenySteamValidationStalled = 14,
 	k_EDenySteamOwnerLeftGuestUser = 15,
 };
-*/
 
 typedef uint32 HAuthTicket;
 const HAuthTicket k_HAuthTicketInvalid = 0;
@@ -205,8 +200,6 @@ enum EBeginAuthSessionResult {
 	k_EBeginAuthSessionResultExpiredTicket = 5,
 };
 
-
-/*
 enum EAuthSessionResponse {
 	k_EAuthSessionResponseOK = 0,
 	k_EAuthSessionResponseUserNotConnectedToSteam = 1,
@@ -220,7 +213,6 @@ enum EAuthSessionResponse {
 	k_EAuthSessionResponsePublisherIssuedBan = 9,
 	k_EAuthSessionResponseAuthTicketNetworkIdentityFailure = 10,
 };
-*/
 
 enum EUserHasLicenseForAppResult {
 	k_EUserHasLicenseResultHasLicense = 0,
@@ -243,6 +235,16 @@ enum EAccountType {
 	k_EAccountTypeMax
 };
 
+enum ESteamUserStatType {
+	k_ESteamUserStatTypeINVALID = 0,
+	k_ESteamUserStatTypeINT = 1,
+	k_ESteamUserStatTypeFLOAT = 2,
+	k_ESteamUserStatTypeAVGRATE = 3,
+	k_ESteamUserStatTypeACHIEVEMENTS = 4,
+	k_ESteamUserStatTypeGROUPACHIEVEMENTS = 5,
+
+	k_ESteamUserStatTypeMAX
+};
 
 enum EChatEntryType {
 	k_EChatEntryTypeInvalid = 0,
@@ -262,8 +264,6 @@ enum EChatEntryType {
 	k_EChatEntryTypeLinkBlocked = 14,
 };
 
-
-/*
 enum EChatRoomEnterResponse {
 	k_EChatRoomEnterResponseSuccess = 1,
 	k_EChatRoomEnterResponseDoesntExist = 2,
@@ -281,7 +281,6 @@ enum EChatRoomEnterResponse {
 	// k_EChatRoomEnterResponseRankOutOfRange = 14,
 	k_EChatRoomEnterResponseRatelimitExceeded = 15,
 };
-*/
 
 const unsigned int k_unSteamAccountIDMask = 0xFFFFFFFF;
 const unsigned int k_unSteamAccountInstanceMask = 0x000FFFFF;
@@ -295,7 +294,6 @@ enum EChatSteamIDInstanceFlags {
 	k_EChatInstanceFlagMMSLobby = (k_unSteamAccountInstanceMask + 1) >> 3,
 };
 
-/*
 enum ENotificationPosition {
 	k_EPositionInvalid = -1,
 	k_EPositionTopLeft = 0,
@@ -303,9 +301,7 @@ enum ENotificationPosition {
 	k_EPositionBottomLeft = 2,
 	k_EPositionBottomRight = 3,
 };
-*/
 
-/*
 enum EBroadcastUploadResult {
 	k_EBroadcastUploadResultNone = 0,
 	k_EBroadcastUploadResultOK = 1,
@@ -332,9 +328,7 @@ enum EBroadcastUploadResult {
 	k_EBroadcastUploadResultVideoInitFailed = 22,
 	k_EBroadcastUploadResultAudioInitFailed = 23,
 };
-*/
 
-/*
 enum EMarketNotAllowedReasonFlags {
 	k_EMarketNotAllowedReason_None = 0,
 	k_EMarketNotAllowedReason_TemporaryFailure = (1 << 0),
@@ -355,9 +349,7 @@ enum EMarketNotAllowedReasonFlags {
 	k_EMarketNotAllowedReason_AcceptedWalletGift = (1 << 15),
 	k_EMarketNotAllowedReason_TradeCooldown = (1 << 16),
 };
-*/
 
-/*
 enum EDurationControlProgress {
 	k_EDurationControlProgress_Full = 0,
 	k_EDurationControlProgress_Half = 1,
@@ -367,9 +359,7 @@ enum EDurationControlProgress {
 	k_EDurationControl_ExitSoon_5h = 4,
 	k_EDurationControl_ExitSoon_Night = 5,
 };
-*/
 
-/*
 enum EDurationControlNotification {
 	k_EDurationControlNotification_None = 0,
 	k_EDurationControlNotification_1Hour = 1,
@@ -380,18 +370,14 @@ enum EDurationControlNotification {
 	k_EDurationControlNotification_ExitSoon_5h = 6,
 	k_EDurationControlNotification_ExitSoon_Night = 7,
 };
-*/
 
-/*
 enum EDurationControlOnlineState {
 	k_EDurationControlOnlineState_Invalid = 0,
 	k_EDurationControlOnlineState_Offline = 1,
 	k_EDurationControlOnlineState_Online = 2,
 	k_EDurationControlOnlineState_OnlineHighPri = 3,
 };
-*/
 
-/*
 enum EBetaBranchFlags {
 	k_EBetaBranch_None = 0,
 	k_EBetaBranch_Default = 1,
@@ -400,7 +386,6 @@ enum EBetaBranchFlags {
 	k_EBetaBranch_Selected = 8,
 	k_EBetaBranch_Installed = 16,
 };
-*/
 
 #define k_steamIDNil CSteamID()
 

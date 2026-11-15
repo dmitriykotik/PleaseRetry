@@ -19,6 +19,7 @@
 #include <stdint.h>
 #include "steamtypes.h"
 #include "steamclientpublic.h"
+#include "steamapiinternal.h"
 
 #if defined(PR_CALLBACK_PACK_SMALL)
     #pragma pack(push, 4)
@@ -93,6 +94,16 @@ enum ESteamNetworkingFakeIPType {
 	k_ESteamNetworkingFakeIPType_GlobalIPv4,
 	k_ESteamNetworkingFakeIPType_LocalIPv4,
 	k_ESteamNetworkingFakeIPType__Force32Bit = 0x7fffffff
+};
+
+struct SteamRelayNetworkStatus_t { 
+	enum { k_iCallback = k_iSteamNetworkingUtilsCallbacks + 1 };
+
+	ESteamNetworkingAvailability m_eAvail;
+	int m_bPingMeasurementInProgress;
+	ESteamNetworkingAvailability m_eAvailNetworkConfig;
+	ESteamNetworkingAvailability m_eAvailAnyRelay;
+	char m_debugMsg[ 256 ];
 };
 
 #pragma pack(push,1)

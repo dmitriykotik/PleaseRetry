@@ -1,0 +1,89 @@
+//========= Copyright (C) 2026, dmitriykotik. Released under the MIT License. ==//
+// This file is part of PleaseRetryEmu, an open-source project. This software
+// is provided "AS IS", without warranty of any kind, express or implied,
+// including but not limited to the warranties of merchantability, fitness
+// for a particular purpose and noninfringement.
+//
+// LEGAL NOTICE: This software is an independent compatibility layer and is NOT
+// affiliated with, endorsed, or authorized by Valve Corporation. "Steam" and
+// "Steamworks" are registered trademarks of Valve Corporation.
+//
+// Developed strictly for EDUCATIONAL, RESEARCH, and software preservation
+// purposes. The author holds NO LIABILITY for any misuse, legal consequences,
+// or third-party restrictions. All actions are performed at your own risk.
+//=============================================================================//
+
+#pragma once
+
+#include "isteamuser.h"
+
+class ISteamUser023 {
+public:
+    virtual HSteamUser GetHSteamUser() = 0;
+
+    virtual bool BLoggedOn() = 0;
+
+    virtual CSteamID GetSteamID() = 0;
+
+    virtual int InitiateGameConnection_DEPRECATED(void *pAuthBlob, int cbMaxAuthBlob, CSteamID steamIDGameServer, uint32 unIPServer, uint16 usPortServer, bool bSecure) = 0;
+
+    virtual void TerminateGameConnection_DEPRECATED(uint32 unIPServer, uint16 usPortServer) = 0;
+
+    virtual void TrackAppUsageEvent(CGameID gameID, int eAppUsageEvent, const char *pchExtraInfo) = 0;
+
+    virtual bool GetUserDataFolder(char *pchBuffer, int cubBuffer) = 0;
+
+    virtual void StartVoiceRecording() = 0;
+
+    virtual void StopVoiceRecording() = 0;
+
+    virtual EVoiceResult GetAvailableVoice(uint32 *pcbCompressed, uint32 *pcbUncompressed_Deprecated = 0, uint32 nUncompressedVoiceDesiredSampleRate_Deprecated = 0) = 0;
+
+    virtual EVoiceResult GetVoice(bool bWantCompressed, void *pDestBuffer, uint32 cbDestBufferSize, uint32 *nBytesWritten, bool bWantUncompressed_Deprecated = false, void *pUncompressedDestBuffer_Deprecated = 0, uint32 cbUncompressedDestBufferSize_Deprecated = 0, uint32 *nUncompressBytesWritten_Deprecated = 0, uint32 nUncompressedVoiceDesiredSampleRate_Deprecated = 0) = 0;
+
+    virtual EVoiceResult DecompressVoice(const void *pCompressed, uint32 cbCompressed, void *pDestBuffer, uint32 cbDestBufferSize, uint32 *nBytesWritten, uint32 nDesiredSampleRate) = 0;
+
+    virtual uint32 GetVoiceOptimalSampleRate() = 0;
+
+    virtual HAuthTicket GetAuthSessionTicket(void *pTicket, int cbMaxTicket, uint32 *pcbTicket, const SteamNetworkingIdentity *pSteamNetworkingIdentity) = 0;
+
+    virtual HAuthTicket GetAuthTicketForWebApi(const char *pchIdentity) = 0;
+
+    virtual EBeginAuthSessionResult BeginAuthSession(const void *pAuthTicket, int cbAuthTicket, CSteamID steamID) = 0;
+
+    virtual void EndAuthSession(CSteamID steamID) = 0;
+
+    virtual void CancelAuthTicket(HAuthTicket hAuthTicket) = 0;
+
+    virtual EUserHasLicenseForAppResult UserHasLicenseForApp(CSteamID steamID, AppId_t appID) = 0;
+
+    virtual bool BIsBehindNAT() = 0;
+
+    virtual void AdvertiseGame(CSteamID steamIDGameServer, uint32 unIPServer, uint16 usPortServer) = 0;
+
+    virtual SteamAPICall_t RequestEncryptedAppTicket(void *pDataToInclude, int cbDataToInclude) = 0;
+
+    virtual bool GetEncryptedAppTicket(void *pTicket, int cbMaxTicket, uint32 *pcbTicket) = 0;
+
+    virtual int GetGameBadgeLevel(int nSeries, bool bFoil) = 0;
+
+    virtual int GetPlayerSteamLevel() = 0;
+
+    virtual SteamAPICall_t RequestStoreAuthURL(const char *pchRedirectURL) = 0;
+
+    virtual bool BIsPhoneVerified() = 0;
+
+    virtual bool BIsTwoFactorEnabled() = 0;
+
+    virtual bool BIsPhoneIdentifying() = 0;
+
+    virtual bool BIsPhoneRequiringVerification() = 0;
+
+    virtual SteamAPICall_t GetMarketEligibility() = 0;
+
+    virtual SteamAPICall_t GetDurationControl() = 0;
+
+    virtual bool BSetDurationControlOnlineState(EDurationControlOnlineState eNewState) = 0;
+};
+
+#define STEAMUSER_INTERFACE_VERSION_023 "SteamUser023"

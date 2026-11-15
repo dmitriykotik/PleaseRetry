@@ -16,22 +16,8 @@
 #pragma once
 
 #include "steamtypes.h"
-#include "steamexports.h"
 #include "steamapicommon.h"
 #include "steamclientpublic.h"
-
-PR_API HSteamPipe PR_CALLTYPE SteamAPI_GetHSteamPipe();
-PR_API HSteamUser PR_CALLTYPE SteamAPI_GetHSteamUser();
-PR_API HSteamPipe PR_CALLTYPE SteamGameServer_GetHSteamPipe();
-PR_API HSteamUser PR_CALLTYPE SteamGameServer_GetHSteamUser();
-PR_API void *PR_CALLTYPE SteamInternal_ContextInit(void *pContextInitData);
-PR_API void *PR_CALLTYPE SteamInternal_CreateInterface(const char *ver);
-PR_API void *PR_CALLTYPE SteamInternal_FindOrCreateUserInterface(HSteamUser hSteamUser, const char *pszVersion);
-PR_API void *PR_CALLTYPE SteamInternal_FindOrCreateGameServerInterface(HSteamUser hSteamUser, const char *pszVersion);
-PR_API void PR_CALLTYPE SteamAPI_RegisterCallback(class CCallbackBase *pCallback, int iCallback);
-PR_API void PR_CALLTYPE SteamAPI_UnregisterCallback(class CCallbackBase *pCallback);
-PR_API void PR_CALLTYPE SteamAPI_RegisterCallResult(class CCallbackBase *pCallback, SteamAPICall_t hAPICall);
-PR_API void PR_CALLTYPE SteamAPI_UnregisterCallResult(class CCallbackBase *pCallback, SteamAPICall_t hAPICall);
 
 #if defined(PR_CALLBACK_PACK_SMALL)
     #pragma pack(push, 4)
@@ -70,10 +56,12 @@ enum { k_iSteam2AsyncCallbacks = 1900 };
 enum { k_iSteamGameStatsCallbacks = 2000 };
 enum { k_iSteamHTTPCallbacks = 2100 };
 enum { k_iSteamScreenshotsCallbacks = 2300 };
+enum { k_iSteamUnifiedMessagesCallbacks = 2500 };
 enum { k_iSteamStreamLauncherCallbacks = 2600 };
 enum { k_iSteamControllerCallbacks = 2800 };
 enum { k_iSteamUGCCallbacks = 3400 };
 enum { k_iSteamStreamClientCallbacks = 3500 };
+enum { k_iSteamAppListCallbacks = 3900 };
 enum { k_iSteamMusicCallbacks = 4000 };
 enum { k_iSteamMusicRemoteCallbacks = 4100 };
 enum { k_iSteamGameNotificationCallbacks = 4400 }; 

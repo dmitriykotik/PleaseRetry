@@ -355,6 +355,13 @@ public:
 	int m_nTotalFriendCount;
 };
 
+class ISteamMatchmakingServerListResponseLegacy {
+public:
+	virtual void ServerResponded(int iServer) = 0; 
+	virtual void ServerFailedToRespond(int iServer) = 0; 
+	virtual void RefreshComplete(EMatchMakingServerResponse response) = 0; 
+};
+
 class ISteamMatchmakingServerListResponse {
 public:
 	virtual void ServerResponded(HServerListRequest hRequest, int iServer) = 0; 

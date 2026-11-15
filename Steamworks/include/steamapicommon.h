@@ -25,6 +25,7 @@ const int k_cchMaxSteamErrMsg = 1024;
 typedef char SteamErrMsg[k_cchMaxSteamErrMsg];
 
 extern "C" typedef void ( PR_CALLTYPE *SteamAPIWarningMessageHook_t )(int, const char *);
+extern "C" typedef void( PR_CALLTYPE *SteamAPI_PostAPIResultInProcess_t )(SteamAPICall_t callHandle, void *, uint32 unCallbackSize, int iCallbackNum);
 extern "C" typedef uint32 ( PR_CALLTYPE *SteamAPI_CheckCallbackRegistered_t )(int iCallbackNum);
 
 PR_API void PR_CALLTYPE SteamAPI_RunCallbacks();

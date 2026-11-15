@@ -19,17 +19,17 @@
 
 class ISteamMatchmakingServers001 {
 public:
-	virtual void RequestInternetServerList(AppId_t iApp, MatchMakingKeyValuePair_t **ppchFilters, uint32 nFilters, ISteamMatchmakingServerListResponse *pRequestServersResponse) = 0;
+	virtual void RequestInternetServerList(AppId_t iApp, MatchMakingKeyValuePair_t **ppchFilters, uint32 nFilters, ISteamMatchmakingServerListResponseLegacy *pRequestServersResponse) = 0;
 
-	virtual void RequestLANServerList(AppId_t iApp, ISteamMatchmakingServerListResponse *pRequestServersResponse) = 0;
+	virtual void RequestLANServerList(AppId_t iApp, ISteamMatchmakingServerListResponseLegacy *pRequestServersResponse) = 0;
 
-	virtual void RequestFriendsServerList(AppId_t iApp, MatchMakingKeyValuePair_t **ppchFilters, uint32 nFilters, ISteamMatchmakingServerListResponse *pRequestServersResponse) = 0;
+	virtual void RequestFriendsServerList(AppId_t iApp, MatchMakingKeyValuePair_t **ppchFilters, uint32 nFilters, ISteamMatchmakingServerListResponseLegacy *pRequestServersResponse) = 0;
 
-	virtual void RequestFavoritesServerList(AppId_t iApp, MatchMakingKeyValuePair_t **ppchFilters, uint32 nFilters, ISteamMatchmakingServerListResponse *pRequestServersResponse) = 0;
+	virtual void RequestFavoritesServerList(AppId_t iApp, MatchMakingKeyValuePair_t **ppchFilters, uint32 nFilters, ISteamMatchmakingServerListResponseLegacy *pRequestServersResponse) = 0;
 
-	virtual void RequestHistoryServerList(AppId_t iApp, MatchMakingKeyValuePair_t **ppchFilters, uint32 nFilters, ISteamMatchmakingServerListResponse *pRequestServersResponse) = 0;
+	virtual void RequestHistoryServerList(AppId_t iApp, MatchMakingKeyValuePair_t **ppchFilters, uint32 nFilters, ISteamMatchmakingServerListResponseLegacy *pRequestServersResponse) = 0;
 
-	virtual void RequestSpectatorServerList(AppId_t iApp, MatchMakingKeyValuePair_t **ppchFilters, uint32 nFilters, ISteamMatchmakingServerListResponse *pRequestServersResponse) = 0;
+	virtual void RequestSpectatorServerList(AppId_t iApp, MatchMakingKeyValuePair_t **ppchFilters, uint32 nFilters, ISteamMatchmakingServerListResponseLegacy *pRequestServersResponse) = 0;
 
 	virtual gameserveritem_t *GetServerDetails(EMatchMakingType eType, int iServer) = 0;
 

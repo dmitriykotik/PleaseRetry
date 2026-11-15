@@ -36,6 +36,10 @@ typedef std::uint64_t uint64;
 typedef std::intptr_t intp;
 typedef std::uintptr_t uintp;
 
+typedef uint64 GID_t;
+typedef GID_t JobID_t;
+typedef GID_t TxnID_t;
+typedef uint32 PackageId_t;
 typedef uint32 AppId_t;
 typedef uint32 DepotId_t;
 typedef uint32 RTime32;
@@ -43,6 +47,11 @@ typedef uint64 SteamAPICall_t;
 typedef uint32 AccountID_t;
 typedef uint64 PartyBeaconID_t;
 
+const GID_t k_GIDNil = 0xffffffffffffffffull;
+const GID_t k_TxnIDNil = k_GIDNil;
+const GID_t k_TxnIDUnknown = 0;
+const PackageId_t k_uPackageIdFreeSub = 0x0;
+const PackageId_t k_uPackageIdInvalid = 0xFFFFFFFF;
 const AppId_t k_uAppIdInvalid = 0x0;
 const DepotId_t k_uDepotIdInvalid = 0x0;
 const SteamAPICall_t k_uAPICallInvalid = 0x0;

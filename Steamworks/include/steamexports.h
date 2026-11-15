@@ -22,13 +22,13 @@
 #endif
 
 #if defined(_WIN32)
-    #if defined(STEAM_API_EXPORTS)
+    #if defined(PR_API_EXPORTS)
         #define PR_API extern "C" __declspec(dllexport)
     #else
         #define PR_API extern "C" __declspec(dllimport)
     #endif
 #else
-    #if defined(STEAM_API_EXPORTS)
+    #if defined(PR_API_EXPORTS)
         #define PR_API extern "C" __attribute__((visibility("default"))) 
     #else
         #define PR_API extern "C"

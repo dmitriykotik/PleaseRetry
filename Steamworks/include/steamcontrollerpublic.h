@@ -16,11 +16,14 @@
 #pragma once
 
 #include "steamtypes.h"
+#include "steaminputpublic.h"
 
+/*
 enum ESteamControllerPad {
 	k_ESteamControllerPad_Left,
 	k_ESteamControllerPad_Right
 };
+*/
 
 enum EControllerSource {
 	k_EControllerSource_None,
@@ -315,6 +318,7 @@ typedef uint64 ControllerActionSetHandle_t;
 typedef uint64 ControllerDigitalActionHandle_t;
 typedef uint64 ControllerAnalogActionHandle_t;
 
+/*
 enum EXboxOrigin {
 	k_EXboxOrigin_A,
 	k_EXboxOrigin_B,
@@ -345,7 +349,9 @@ enum EXboxOrigin {
 	k_EXboxOrigin_DPad_West,
 	k_EXboxOrigin_DPad_East,
 };
+*/
 
+/*
 enum ESteamInputType {
 	k_ESteamInputType_Unknown,
 	k_ESteamInputType_SteamController,
@@ -354,6 +360,7 @@ enum ESteamInputType {
 	k_ESteamInputType_GenericXInput,
 	k_ESteamInputType_PS4Controller,
 };
+*/
 
 #pragma pack(push, 1)
 struct SteamControllerState_t {

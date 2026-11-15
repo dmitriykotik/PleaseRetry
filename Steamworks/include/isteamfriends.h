@@ -19,84 +19,115 @@
 #include "steamclientpublic.h"
 
 enum EFriendRelationship {
-	k_EFriendRelationshipNone = 0,
-	k_EFriendRelationshipBlocked = 1,
-	k_EFriendRelationshipRequestRecipient = 2,
-	k_EFriendRelationshipFriend = 3,
-	k_EFriendRelationshipRequestInitiator = 4,
-	k_EFriendRelationshipIgnored = 5,
-	k_EFriendRelationshipIgnoredFriend = 6,
+    k_EFriendRelationshipNone = 0,
+    k_EFriendRelationshipBlocked = 1,
+    k_EFriendRelationshipRequestRecipient = 2,
+    k_EFriendRelationshipFriend = 3,
+    k_EFriendRelationshipRequestInitiator = 4,
+    k_EFriendRelationshipIgnored = 5,
+    k_EFriendRelationshipIgnoredFriend = 6,
+    k_EFriendRelationshipSuggested_DEPRECATED = 7,
+    k_EFriendRelationshipMax = 8,
 };
 
 typedef int16 FriendsGroupID_t;
 
+const int k_cchMaxFriendsGroupName = 64;
+const int k_cFriendsGroupLimit = 100;
+const FriendsGroupID_t k_FriendsGroupID_Invalid = -1;
+const int k_cEnumerateFollowersMax = 50;
+
 enum EPersonaState {
-	k_EPersonaStateOffline = 0,
-	k_EPersonaStateOnline = 1,
-	k_EPersonaStateBusy = 2,
-	k_EPersonaStateAway = 3,
-	k_EPersonaStateSnooze = 4,
-	k_EPersonaStateMax,
+    k_EPersonaStateOffline = 0,
+    k_EPersonaStateOnline = 1,
+    k_EPersonaStateBusy = 2,
+    k_EPersonaStateAway = 3,
+    k_EPersonaStateSnooze = 4,
+    k_EPersonaStateLookingToTrade = 5,
+    k_EPersonaStateLookingToPlay = 6,
+    k_EPersonaStateInvisible = 7,
+    k_EPersonaStateMax = 8,
+};
+
+enum EFriendFlags {
+    k_EFriendFlagNone = 0x00,
+    k_EFriendFlagBlocked = 0x01,
+    k_EFriendFlagFriendshipRequested = 0x02,
+    k_EFriendFlagImmediate = 0x04,
+    k_EFriendFlagClanMember = 0x08,
+    k_EFriendFlagOnGameServer = 0x10,
+    k_EFriendFlagHasPlayedWith = 0x20,
+    k_EFriendFlagFriendOfFriend = 0x40,
+    k_EFriendFlagRequestingFriendship = 0x80,
+    k_EFriendFlagRequestingInfo = 0x100,
+    k_EFriendFlagIgnored = 0x200,
+    k_EFriendFlagIgnoredFriend = 0x400,
+    k_EFriendFlagSuggested = 0x800,
+    k_EFriendFlagChatMember = 0x1000,
+    k_EFriendFlagAll = 0xFFFF,
 };
 
 #if defined(PR_CALLBACK_PACK_SMALL)
-#pragma pack(push, 4)
+	#pragma pack(push, 4)
 #elif defined(PR_CALLBACK_PACK_LARGE)
-#pragma pack(push, 8)
+	#pragma pack(push, 8)
 #else
-#error steamclientpublic.h must be included
-#endif 
+	#error steamclientpublic.h must be included
+#endif
+
 struct FriendGameInfo_t {
-	CGameID m_gameID;
-	uint32 m_unGameIP;
-	uint16 m_usGamePort;
-	uint16 m_usQueryPort;
-	CSteamID m_steamIDLobby;
+    CGameID m_gameID;
+    uint32 m_unGameIP;
+    uint16 m_usGamePort;
+    uint16 m_usQueryPort;
+    CSteamID m_steamIDLobby;
 };
+
 #pragma pack(pop)
 
 enum EUserRestriction {
-	k_nUserRestrictionNone		= 0,
-	k_nUserRestrictionUnknown	= 1,
-	k_nUserRestrictionAnyChat	= 2,
-	k_nUserRestrictionVoiceChat	= 4,
-	k_nUserRestrictionGroupChat	= 8,
-	k_nUserRestrictionRating	= 16,
-	k_nUserRestrictionGameInvites	= 32,
-	k_nUserRestrictionTrading	= 64,
+    k_nUserRestrictionNone = 0,
+    k_nUserRestrictionUnknown = 1,
+    k_nUserRestrictionAnyChat = 2,
+    k_nUserRestrictionVoiceChat = 4,
+    k_nUserRestrictionGroupChat = 8,
+    k_nUserRestrictionRating = 16,
+    k_nUserRestrictionGameInvites = 32,
+    k_nUserRestrictionTrading = 64,
 };
 
 enum EOverlayToStoreFlag {
-	k_EOverlayToStoreFlag_None = 0,
-	k_EOverlayToStoreFlag_AddToCart = 1,
-	k_EOverlayToStoreFlag_AddToCartAndShow = 2,
+    k_EOverlayToStoreFlag_None = 0,
+    k_EOverlayToStoreFlag_AddToCart = 1,
+    k_EOverlayToStoreFlag_AddToCartAndShow = 2,
 };
 
 enum EActivateGameOverlayToWebPageMode {
-	k_EActivateGameOverlayToWebPageMode_Default = 0,
-	k_EActivateGameOverlayToWebPageMode_Modal = 1
+    k_EActivateGameOverlayToWebPageMode_Default = 0,
+    k_EActivateGameOverlayToWebPageMode_Modal = 1,
 };
 
 enum ECommunityProfileItemType {
-	k_ECommunityProfileItemType_AnimatedAvatar		 = 0,
-	k_ECommunityProfileItemType_AvatarFrame			 = 1,
-	k_ECommunityProfileItemType_ProfileModifier		 = 2,
-	k_ECommunityProfileItemType_ProfileBackground	 = 3,
-	k_ECommunityProfileItemType_MiniProfileBackground = 4,
+    k_ECommunityProfileItemType_AnimatedAvatar = 0,
+    k_ECommunityProfileItemType_AvatarFrame = 1,
+    k_ECommunityProfileItemType_ProfileModifier = 2,
+    k_ECommunityProfileItemType_ProfileBackground = 3,
+    k_ECommunityProfileItemType_MiniProfileBackground = 4,
 };
+
 enum ECommunityProfileItemProperty {
-	k_ECommunityProfileItemProperty_ImageSmall	   = 0,
-	k_ECommunityProfileItemProperty_ImageLarge	   = 1,
-	k_ECommunityProfileItemProperty_InternalName   = 2,
-	k_ECommunityProfileItemProperty_Title		   = 3,
-	k_ECommunityProfileItemProperty_Description	   = 4,
-	k_ECommunityProfileItemProperty_AppID		   = 5,
-	k_ECommunityProfileItemProperty_TypeID		   = 6,
-	k_ECommunityProfileItemProperty_Class		   = 7,
-	k_ECommunityProfileItemProperty_MovieWebM	   = 8,
-	k_ECommunityProfileItemProperty_MovieMP4	   = 9,
-	k_ECommunityProfileItemProperty_MovieWebMSmall = 10,
-	k_ECommunityProfileItemProperty_MovieMP4Small  = 11,
+    k_ECommunityProfileItemProperty_ImageSmall = 0,
+    k_ECommunityProfileItemProperty_ImageLarge = 1,
+    k_ECommunityProfileItemProperty_InternalName = 2,
+    k_ECommunityProfileItemProperty_Title = 3,
+    k_ECommunityProfileItemProperty_Description = 4,
+    k_ECommunityProfileItemProperty_AppID = 5,
+    k_ECommunityProfileItemProperty_TypeID = 6,
+    k_ECommunityProfileItemProperty_Class = 7,
+    k_ECommunityProfileItemProperty_MovieWebM = 8,
+    k_ECommunityProfileItemProperty_MovieMP4 = 9,
+    k_ECommunityProfileItemProperty_MovieWebMSmall = 10,
+    k_ECommunityProfileItemProperty_MovieMP4Small = 11,
 };
 
 class ISteamFriends;
