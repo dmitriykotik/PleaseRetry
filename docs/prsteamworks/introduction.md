@@ -45,22 +45,20 @@
 | isteamnetworking.h          | ISteamNetworking                           | SteamNetworking`XXX`                         |    001-006     |  `V`  | &check; |
 | isteamnetworkingfakeip.h    | ISteamNetworkingFakeUDPPort                | -                                            |       -        |  `G`  | &check; |
 | isteamnetworkingmessages.h  | ISteamNetworkingMessages                   | SteamNetworkingMessages`XXX`                 |    002-002     |  `V`  | &check; |
-| isteamnetworkingsockets.h   | ISteamNetworkingSockets                    | SteamNetworkingSockets`XXX`                  |    002-013     |  `V`  | &cross; |
-| isteamnetworkingutils.h     | ISteamNetworkingUtils                      | SteamNetworkingUtils`XXX`                    |    001-004     |  `V`  | &cross; |
-| isteamps3overlayrender.h    | ISteamPS3OverlayRender                     | -                                            |       -        |  `V`  | &cross; |
-| isteamps3overlayrender.h    | ISteamPS3OverlayRenderHost                 | -                                            |       -        |  `G`  | &cross; |
-| isteamparentalsettings.h    | ISteamParentalSettings                     | STEAMPARENTALSETTINGS_INTERFACE_VERSION`XXX` |    001-001     |  `V`  | &cross; |
-| isteamremoteplay.h          | ISteamRemotePlay                           | STEAMREMOTEPLAY_INTERFACE_VERSION`XXX`       |    001-004     |  `V`  | &cross; |
-| isteamremotestorage.h       | ISteamRemoteStorage                        | STEAMREMOTESTORAGE_INTERFACE_VERSION`XXX`    |    001-016     |  `V`  | &cross; |
-| isteamscreenshots.h         | ISteamScreenshots                          | STEAMSCREENSHOTS_INTERFACE_VERSION`XXX`      |    001-003     |  `V`  | &cross; |
-| isteamtv.h                  | ISteamTV                                   | STEAMTV_INTERFACE_V`XXX`                     |    001-001     |  `V`  | &cross; |
-| isteamtimeline.h            | ISteamTimeline                             | STEAMTIMELINE_INTERFACE_V`XXX`               |    001-004     |  `V`  | &cross; |
-| isteamugc.h                 | ISteamUGC                                  | STEAMUGC_INTERFACE_VERSION`XXX`              |    001-021     |  `V`  | &cross; |
-| isteamunifiedmessages.h     | ISteamUnifiedMessages                      | STEAMUNIFIEDMESSAGES_INTERFACE_VERSION`XXX`  |    001-001     |  `V`  | &cross; |
-| isteamuser.h                | ISteamUser                                 | SteamUser`XXX`                               |    009-023     |  `V`  | &cross; |
-| isteamuserstats.h           | ISteamUserStats                            | STEAMUSERSTATS_INTERFACE_VERSION`XXX`        |    001-013     |  `V`  | &cross; |
-| isteamutils.h               | ISteamUtils                                | SteamUtils`XXX`                              |    002-011     |  `V`  | &cross; |
-| isteamvideo.h               | ISteamVideo                                | STEAMVIDEO_INTERFACE_V`XXX`                  |    001-007     |  `V`  | &cross; |
+| isteamnetworkingsockets.h   | ISteamNetworkingSockets                    | SteamNetworkingSockets`XXX`                  |    002-013     |  `V`  | &check; |
+| isteamnetworkingutils.h     | ISteamNetworkingUtils                      | SteamNetworkingUtils`XXX`                    |    001-004     |  `V`  | &check; |
+| isteamparentalsettings.h    | ISteamParentalSettings                     | STEAMPARENTALSETTINGS_INTERFACE_VERSION`XXX` |    001-001     |  `V`  | &check; |
+| isteamremoteplay.h          | ISteamRemotePlay                           | STEAMREMOTEPLAY_INTERFACE_VERSION`XXX`       |    001-004     |  `V`  | &check; |
+| isteamremotestorage.h       | ISteamRemoteStorage                        | STEAMREMOTESTORAGE_INTERFACE_VERSION`XXX`    |    001-016     |  `V`  | &check; |
+| isteamscreenshots.h         | ISteamScreenshots                          | STEAMSCREENSHOTS_INTERFACE_VERSION`XXX`      |    001-003     |  `V`  | &check; |
+| isteamtimeline.h            | ISteamTimeline                             | STEAMTIMELINE_INTERFACE_V`XXX`               |    001-004     |  `V`  | &check; |
+| isteamtv.h                  | ISteamTV                                   | STEAMTV_INTERFACE_V`XXX`                     |    001-001     |  `V`  | &check; |
+| isteamugc.h                 | ISteamUGC                                  | STEAMUGC_INTERFACE_VERSION`XXX`              |    001-021     |  `V`  | &check; |
+| isteamunifiedmessages.h     | ISteamUnifiedMessages                      | STEAMUNIFIEDMESSAGES_INTERFACE_VERSION`XXX`  |    001-001     |  `V`  | &check; |
+| isteamuser.h                | ISteamUser                                 | SteamUser`XXX`                               |    009-023     |  `V`  | &check; |
+| isteamuserstats.h           | ISteamUserStats                            | STEAMUSERSTATS_INTERFACE_VERSION`XXX`        |    001-013     |  `V`  | &check; |
+| isteamutils.h               | ISteamUtils                                | SteamUtils`XXX`                              |    002-011     |  `V`  | &check; |
+| isteamvideo.h               | ISteamVideo                                | STEAMVIDEO_INTERFACE_V`XXX`                  |    001-007     |  `V`  | &check; |
 
 > [!WARNING]
 > **Обратите внимание:** знак `~` означает, что вам необходимо прочитать документацию по этому интерфейсу.
@@ -87,7 +85,7 @@
 Ну, вы понимаете. Мне показалось, что проще написать с нуля свой SDK, взяв только самое необходимое. Считайте, что мой проект - это не форк `SteamworksSDK`, а полностью новый SDK, созданный специально для целей, где есть зависимость от версий интерфейсов.
 
 > [!NOTE]
-> Однако, не все интерфейсы и методы были написаны только с помощью `SteamworksSDK`. За основу некоторых методов и интерфейсов пришлось брать сторонние проекты (например, `GoldbergEmu` и `OpenSteamworks`), а также данные, полученные реверс инженерингом.
+> Однако, не все интерфейсы и методы были написаны только с помощью `SteamworksSDK`. За основу некоторых методов и интерфейсов пришлось брать сторонние проекты (например, `GoldbergEmu` и `OpenSteamworks`).
 
 **Обратите внимание:** может возникнуть проблема совместимости со `SteamworksSDK`. Если для ваших задач нет необходимости использовать разные версии инструментов, то лучше используйте оригинальный `SteamworksSDK`.
 
